@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node:
     docker:
-      -image: circleci/node:13.13.0
+      - image: circleci/node:13.13.0
 
 jobs:
   install:
@@ -12,9 +12,9 @@ jobs:
       - checkout
       - run: make install
       - persist_to_workspace:
-        root: /home/circleci/project/
-        paths:
-          - node_modules
+          root: /home/circleci/project/
+          paths:
+            - node_modules
 
   build:
     executor: node
