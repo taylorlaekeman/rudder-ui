@@ -33,6 +33,6 @@ workflows:
   test_build_deploy:
     jobs:
       - install
-      - build
+      - build:
           requires:
             - install
