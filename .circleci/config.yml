@@ -21,7 +21,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /hom/circleci/project
+          at: /home/circleci/project
       - run: make build
       - persist_to_workspace:
           root: /home/circleci/project/
