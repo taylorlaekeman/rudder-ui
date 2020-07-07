@@ -6,16 +6,6 @@ executors:
       - image: circleci/node:13.13.0
 
 jobs:
-  install:
-    executor: node
-    steps:
-      - checkout
-      - run: make install
-      - persist_to_workspace:
-          root: /home/circleci/project/
-          paths:
-            - node_modules
-
   build:
     executor: node
     steps:
@@ -28,11 +18,32 @@ jobs:
           paths:
             - build
 
+  install:
+    executor: node
+    steps:
+      - checkout
+      - run: make install
+      - persist_to_workspace:
+          root: /home/circleci/project/
+          paths:
+            - node_modules
+
+  lint:
+    executor: node
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /home/circleci/project
+      - run: make lint
+
 workflows:
   version: 2
   test_build_deploy:
     jobs:
       - install
+      - lint:
+          requires:
+            - install
       - build:
           requires:
             - install
