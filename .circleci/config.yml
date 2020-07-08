@@ -5,6 +5,10 @@ executors:
     docker:
       - image: circleci/node:13.13.0
 
+  deployer:
+    docker:
+      - image: google/cloud-sdk
+
 jobs:
   build:
     executor: node
@@ -17,6 +21,16 @@ jobs:
           root: /home/circleci/project/
           paths:
             - build
+
+  deploy:
+    executor: deployer
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root/project
+      - run: |
+          echo $GCP_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gsutil rsync -r build gs://rudder.tjlaekem.dev
 
   install:
     executor: node
@@ -47,3 +61,7 @@ workflows:
       - build:
           requires:
             - install
+      - deploy:
+          requires:
+            - lint
+            - build
