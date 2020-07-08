@@ -1,0 +1,70 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:13.13.0
+
+  deployer:
+    docker:
+      - image: google/cloud-sdk
+
+jobs:
+  build:
+    executor: node
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /home/circleci/project
+      - run: make build
+      - persist_to_workspace:
+          root: /home/circleci/project/
+          paths:
+            - build
+
+  deploy:
+    executor: deployer
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root/project
+      - run: |
+          echo $GCP_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gsutil rsync -r build gs://rudder.tjlaekem.dev
+
+  install:
+    executor: node
+    steps:
+      - checkout
+      - run: make install
+      - persist_to_workspace:
+          root: /home/circleci/project/
+          paths:
+            - node_modules
+
+  lint:
+    executor: node
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /home/circleci/project
+      - run: make lint
+
+workflows:
+  version: 2
+  test_build_deploy:
+    jobs:
+      - install
+      - lint:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - lint
+            - build
+          filters:
+            branches:
+              only: master
