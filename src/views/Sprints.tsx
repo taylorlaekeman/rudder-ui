@@ -3,6 +3,7 @@ import React from 'react';
 
 import Adder from 'components/Adder';
 import Link from 'components/Link';
+import type { Sprint } from 'types.d';
 
 const MONTHS = [
   'January',
@@ -16,34 +17,36 @@ const MONTHS = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 const sprintsQuery = gql`
-{
-  sprints {
-    id,
-    endDate,
-    goals {
-      id,
-      text
+  {
+    sprints {
+      id
+      endDate
+      goals {
+        id
+        text
+      }
     }
   }
-}
 `;
 
 function transformDate(date: string): string {
   const [year, month, day] = date.split('-');
   return `${MONTHS[parseInt(month, 10) - 1]} ${day}, ${year}`;
-};
+}
 
 const Sprints = () => {
-  const { loading, error, data } = useQuery(sprintsQuery);
+  const { data } = useQuery(sprintsQuery);
 
   return (
     <>
-      {data?.sprints.map(({ endDate, id }: { endDate: string, id: string }) => (
-        <Link to={`/sprints/${id}`} key={id}>{transformDate(endDate)}</Link>
+      {data?.sprints.map((sprint: Sprint) => (
+        <Link to={`/sprints/${sprint.id}`} key={sprint.id}>
+          {transformDate(sprint.endDate)}
+        </Link>
       ))}
       <Adder text="+ Add a sprint" />
     </>

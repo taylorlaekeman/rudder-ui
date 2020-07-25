@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import noop from 'utils/noop';
+
 const StyledInput = styled.input`
   background: none;
   border: solid ${({ theme }) => theme.colours.border} 1px;
@@ -12,11 +14,11 @@ const StyledInput = styled.input`
 `;
 
 const Input = ({
-  onChange = () => {},
+  onChange = noop,
   value = '',
 }: {
-  onChange: { (value: string): void };
-  value: string;
+  onChange?: { (value: string): void };
+  value?: string;
 }) => (
   <StyledInput
     onChange={(event) => onChange(event.target.value)}
@@ -24,5 +26,10 @@ const Input = ({
     value={value}
   />
 );
+
+Input.defaultProps = {
+  onChange: noop,
+  value: '',
+};
 
 export default Input;

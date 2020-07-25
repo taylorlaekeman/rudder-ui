@@ -10,8 +10,8 @@ import Rudder from 'views/Rudder';
 
 const client = new ApolloClient({
   uri: settings.API_URL,
-  cache: new InMemoryCache()
-})
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (

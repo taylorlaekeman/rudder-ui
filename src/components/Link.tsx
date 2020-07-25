@@ -9,7 +9,7 @@ const StyledLink = styled(UnstyledLink)`
   padding: 16px;
 `;
 
-const Link = ({ children, to }: { children: React.ReactNode, to: string }) => (
+const Link = ({ children, to }: { children: React.ReactNode; to: string }) => (
   <StyledLink to={to}>{children}</StyledLink>
 );
 

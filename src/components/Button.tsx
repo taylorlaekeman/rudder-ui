@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import noop from 'utils/noop';
+
 const StyledButton = styled.button<{ area: string }>`
   appearance: none;
   background: none;
@@ -19,7 +21,7 @@ const StyledButton = styled.button<{ area: string }>`
 const Button = ({
   area = '',
   children,
-  onClick = () => {},
+  onClick = noop,
   type = 'button',
 }: {
   area?: string;
@@ -33,6 +35,8 @@ const Button = ({
 );
 
 Button.defaultProps = {
+  area: '',
+  onClick: noop,
   type: 'button',
 };
 

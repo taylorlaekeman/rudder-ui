@@ -9,13 +9,17 @@ const Adder = ({ text = '' }: { text?: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   if (isExpanded)
     return (
-      <Form onSubmit={() => console.log('submit')}>
+      <Form>
         <Input onChange={setValue} value={value} />
         <Button type="submit">Save</Button>
         <Button onClick={() => setIsExpanded(false)}>Cancel</Button>
       </Form>
     );
-  return <Button onClick={() => setIsExpanded(true)}>{text}</Button>
+  return <Button onClick={() => setIsExpanded(true)}>{text}</Button>;
+};
+
+Adder.defaultProps = {
+  text: '',
 };
 
 export default Adder;
