@@ -6,7 +6,7 @@ import Adder from 'components/Adder';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Checkbox from 'components/Form/Checkbox';
-import { GoalType } from 'types';
+import { Goal } from 'types';
 
 const sprintQuery = gql`
   query getSprint($id: ID!) {
@@ -21,7 +21,7 @@ const sprintQuery = gql`
   }
 `;
 
-const Goals = () => {
+const Goals: React.FunctionComponent = () => {
   const { id } = useParams();
 
   const { data } = useQuery(sprintQuery, { variables: { id } });
@@ -29,7 +29,7 @@ const Goals = () => {
   return (
     <>
       <Form>
-        {data?.sprint.goals.map((goal: GoalType) => (
+        {data?.sprint.goals.map((goal: Goal) => (
           <section key={goal.id}>
             <Checkbox />
             <Button>{goal.text}</Button>

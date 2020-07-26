@@ -9,8 +9,14 @@ const StyledLink = styled(UnstyledLink)`
   padding: 16px;
 `;
 
-const Link = ({ children, to }: { children: React.ReactNode; to: string }) => (
-  <StyledLink to={to}>{children}</StyledLink>
-);
+type propTypes = {
+  children: React.ReactNode;
+  to: string;
+};
+
+const Link: React.FunctionComponent<propTypes> = ({
+  children,
+  to,
+}: propTypes) => <StyledLink to={to}>{children}</StyledLink>;
 
 export default Link;

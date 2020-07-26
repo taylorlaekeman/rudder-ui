@@ -7,15 +7,17 @@ const StyledForm = styled.form<{ area: string }>`
   grid-area: ${({ area }) => area};
 `;
 
-const Form = ({
-  area = '',
-  children,
-  onSubmit = noop,
-}: {
+type propTypes = {
   area?: string;
   children: React.ReactNode;
   onSubmit?: { (): void };
-}) => (
+};
+
+const Form: React.FunctionComponent<propTypes> = ({
+  area = '',
+  children,
+  onSubmit = noop,
+}: propTypes) => (
   <StyledForm
     action="#"
     area={area}

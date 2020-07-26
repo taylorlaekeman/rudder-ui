@@ -18,13 +18,15 @@ const Label = styled.label<{ isChecked: boolean }>`
   width: 16px;
 `;
 
-const Checkbox = ({
-  onChange = noop,
-  value = false,
-}: {
+type propTypes = {
   onChange?: { (): void };
   value?: boolean;
-}) => (
+};
+
+const Checkbox: React.FunctionComponent<propTypes> = ({
+  onChange = noop,
+  value = false,
+}: propTypes) => (
   <>
     <Input type="checkbox" />
     <Label isChecked={value} />

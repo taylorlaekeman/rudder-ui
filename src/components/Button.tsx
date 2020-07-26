@@ -18,17 +18,19 @@ const StyledButton = styled.button<{ area: string }>`
   }
 `;
 
-const Button = ({
-  area = '',
-  children,
-  onClick = noop,
-  type = 'button',
-}: {
+type propTypes = {
   area?: string;
   children: React.ReactNode;
   onClick?: { (): void };
   type?: 'button' | 'submit';
-}) => (
+};
+
+const Button: React.FunctionComponent<propTypes> = ({
+  area = '',
+  children,
+  onClick = noop,
+  type = 'button',
+}: propTypes) => (
   <StyledButton area={area} type={type} onClick={onClick}>
     {children}
   </StyledButton>

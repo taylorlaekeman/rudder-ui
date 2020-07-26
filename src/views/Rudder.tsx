@@ -46,7 +46,7 @@ const Wrapper = styled.article`
   padding: 16px;
 `;
 
-const Rudder = () => (
+const Rudder: React.FunctionComponent = () => (
   <Wrapper>
     <Heading>Rudder</Heading>
     <Main>

@@ -13,13 +13,15 @@ const StyledInput = styled.input`
   width: 100%;
 `;
 
-const Input = ({
-  onChange = noop,
-  value = '',
-}: {
+type propTypes = {
   onChange?: { (value: string): void };
   value?: string;
-}) => (
+};
+
+const Input: React.FunctionComponent<propTypes> = ({
+  onChange = noop,
+  value = '',
+}: propTypes) => (
   <StyledInput
     onChange={(event) => onChange(event.target.value)}
     type="text"

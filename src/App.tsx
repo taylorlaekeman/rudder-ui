@@ -13,17 +13,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Rudder />
-        </ThemeProvider>
-      </Router>
-    </ApolloProvider>
-  );
-}
+const App: React.FunctionComponent = () => (
+  <ApolloProvider client={client}>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Rudder />
+      </ThemeProvider>
+    </Router>
+  </ApolloProvider>
+);
 
 export default App;

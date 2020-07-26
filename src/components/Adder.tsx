@@ -4,7 +4,11 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Form/Input';
 
-const Adder = ({ text = '' }: { text?: string }) => {
+type propTypes = { text?: string };
+
+const Adder: React.FunctionComponent<propTypes> = ({
+  text = '',
+}: propTypes) => {
   const [value, setValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   if (isExpanded)

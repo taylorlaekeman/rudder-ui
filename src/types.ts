@@ -1,10 +1,10 @@
-export interface GoalType {
+export interface Goal {
   id: string;
   text: string;
 }
 
-export type Sprint = {
+export interface Sprint {
   endDate: string;
   id: string;
-  goals: GoalType[];
-};
+  goals: Goal[];
+}
