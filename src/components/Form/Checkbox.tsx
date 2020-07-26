@@ -18,19 +18,25 @@ const Label = styled.label<{ isChecked: boolean }>`
   width: 16px;
 `;
 
+const Wrapper = styled.div<{ area: string }>`
+  grid-area: ${({ area }) => area};
+`;
+
 type propTypes = {
+  area?: string;
   onChange?: { (): void };
   value?: boolean;
 };
 
 const Checkbox: React.FunctionComponent<propTypes> = ({
+  area = '',
   onChange = noop,
   value = false,
 }: propTypes) => (
-  <>
-    <Input type="checkbox" />
+  <Wrapper area={area}>
+    <Input checked={value} onChange={onChange} type="checkbox" />
     <Label isChecked={value} />
-  </>
+  </Wrapper>
 );
 
 export default Checkbox;
