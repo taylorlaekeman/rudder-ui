@@ -58,6 +58,7 @@
     "prettier/prettier": "error",
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, {"extensions": [".ts", ".tsx"]}],
+    "react/jsx-curly-newline": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error"
   },
