@@ -1,9 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
+import themeDefinition from 'styles/theme';
+
 export default createGlobalStyle`
   * {
     box-sizing: border-box;
-    font-family: 'Raleway', sans-serif;
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.font};
   } 
 
   body {

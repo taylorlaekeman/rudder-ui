@@ -43,6 +43,7 @@ const Sprints: React.FunctionComponent = () => {
 
   return (
     <>
+      <p>January 1, 2000</p>
       {data?.sprints.map((sprint: Sprint) => (
         <Link to={`/sprints/${sprint.id}`} key={sprint.id}>
           {transformDate(sprint.endDate)}
