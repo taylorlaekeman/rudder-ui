@@ -33,16 +33,27 @@ function transformDate(date: string): string {
 
 const Sprints: FunctionComponent = () => {
   const { data } = useQuery(queries.getSprints);
+  const currentDate = new Date();
+
+  const sprints = data?.sprints;
+
+  const finishedSprints = sprints?.filter((sprint : Sprint) => currentDate > new Date(sprint.endDate));
+  const currentSprints = sprints?.filter((sprint : Sprint) => currentDate < new Date(sprint.endDate));
 
   return (
     <>
       <Explanation>A sprint is a list of goals with a deadline.  Pick a date in the near future and decide what you want to have finished by that day.</Explanation>
-      {data?.sprints.map((sprint: Sprint) => (
-        <Link key={sprint.id} isStruck={new Date() > new Date(sprint.endDate)} to={`/sprints/${sprint.id}`}>
+      {currentSprints?.map((sprint: Sprint) => (
+        <Link key={sprint.id} isStruck={false} to={`/sprints/${sprint.id}`}>
           {transformDate(sprint.endDate)}
         </Link>
       ))}
       <Adder text="+ Add a sprint" />
+      {finishedSprints?.map((sprint: Sprint) => (
+        <Link key={sprint.id} isStruck={true} to={`/sprints/${sprint.id}`}>
+          {transformDate(sprint.endDate)}
+        </Link>
+      ))}
     </>
   );
 };

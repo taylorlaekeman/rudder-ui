@@ -7,7 +7,7 @@ const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
   display: block;
   font-size: 1.2rem;
   padding: 16px;
-  ${({ $isStruck }) => $isStruck && `text-decoration: line-through 2px;`}
+  text-decoration: ${({ $isStruck }) => $isStruck ? 'line-through 2px' : 'none'};
 `;
 
 type propTypes = {
