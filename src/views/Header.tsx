@@ -28,11 +28,11 @@ const Heading = styled.h1`
 `;
 
 const Header: FunctionComponent = () => {
-  const isSprintsPage = useRouteMatch('/sprints/:id');
+  const match = useRouteMatch('/');
   return (
     <StyledHeader>
       <Heading>Rudder</Heading>
-      {isSprintsPage && <Link to="/">Sprints &gt;</Link>}
+      {match?.isExact && <Link to="/">Sprints &gt;</Link>}
     </StyledHeader>
   );
 };
