@@ -2,21 +2,24 @@ import React from 'react';
 import { Link as UnstyledLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledLink = styled(UnstyledLink)`
+const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
   color: ${({ theme }) => theme.colours.text};
   display: block;
   font-size: 1.2rem;
   padding: 16px;
+  ${({ $isStruck }) => $isStruck && `text-decoration: line-through 2px;`}
 `;
 
 type propTypes = {
-  children: React.ReactNode;
-  to: string;
+  children?: React.ReactNode;
+  isStruck?: boolean;
+  to?: string;
 };
 
 const Link: React.FunctionComponent<propTypes> = ({
-  children,
-  to,
-}: propTypes) => <StyledLink to={to}>{children}</StyledLink>;
+  children = '',
+  isStruck = false,
+  to = '',
+}: propTypes) => <StyledLink $isStruck={isStruck} to={to}>{children}</StyledLink>;
 
 export default Link;
