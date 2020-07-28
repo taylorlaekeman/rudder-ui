@@ -1,9 +1,14 @@
 import { useQuery, gql } from '@apollo/client';
 import React from 'react';
+import styled from 'styled-components';
 
 import Adder from 'components/Adder';
 import Link from 'components/Link';
 import { Sprint } from 'types';
+
+const Explanation = styled.p`
+  font-size: 0.8rem;
+`;
 
 const MONTHS = [
   'January',
@@ -43,7 +48,7 @@ const Sprints: React.FunctionComponent = () => {
 
   return (
     <>
-      <p>January 1, 2000</p>
+      <Explanation>A sprint is a list of goals with a deadline.  Pick a date in the near future and decide what you want to have finished by that day.</Explanation>
       {data?.sprints.map((sprint: Sprint) => (
         <Link to={`/sprints/${sprint.id}`} key={sprint.id}>
           {transformDate(sprint.endDate)}
