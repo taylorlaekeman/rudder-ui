@@ -8,7 +8,7 @@ import Link from 'components/Link';
 import { Sprint } from 'types';
 
 const Explanation = styled.p`
-  font-size: 0.8rem;
+  ${({ theme }) => theme.font.small}
 `;
 
 const MONTHS = [
