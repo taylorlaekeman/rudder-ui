@@ -44,9 +44,7 @@ const Sprints: FunctionComponent = () => {
     (sprint: Sprint) => currentDate < new Date(sprint.endDate)
   );
 
-  if (isLoading) return (
-    <LoadingIndicator />
-  );
+  if (isLoading) return <LoadingIndicator />;
 
   return (
     <>
