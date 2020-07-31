@@ -11,4 +11,8 @@ export default createGlobalStyle`
   body {
     margin: 0;
   }
+
+  p {
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.font.small};
+  }
 `;

@@ -7,7 +7,8 @@ const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
   display: block;
   font-size: 1.2rem;
   padding: 16px;
-  text-decoration: ${({ $isStruck }) => $isStruck ? 'line-through 2px' : 'none'};
+  text-decoration: ${({ $isStruck }) =>
+    $isStruck ? 'line-through 2px' : 'none'};
 `;
 
 type propTypes = {
@@ -20,6 +21,10 @@ const Link: React.FunctionComponent<propTypes> = ({
   children = '',
   isStruck = false,
   to = '',
-}: propTypes) => <StyledLink $isStruck={isStruck} to={to}>{children}</StyledLink>;
+}: propTypes) => (
+  <StyledLink $isStruck={isStruck} to={to}>
+    {children}
+  </StyledLink>
+);
 
 export default Link;

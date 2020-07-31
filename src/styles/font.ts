@@ -19,6 +19,12 @@ const font = {
     font-weight: 400;
     text-align: left;
   `,
+  subtitle: css`
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: left;
+  `,
 };
 
 export default font;

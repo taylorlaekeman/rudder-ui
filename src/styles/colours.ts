@@ -8,5 +8,6 @@ const palette = {
 export default {
   border: palette.brand[900],
   fill: palette.brand[900],
+  icon: palette.brand[900],
   text: palette.brand[900],
 };

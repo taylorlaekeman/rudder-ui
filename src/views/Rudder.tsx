@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Goals from 'views/Goals';
 import Header from 'views/Header';
+import SprintCreator from 'views/SprintCreator';
 import Sprints from 'views/Sprints';
 
 const Main = styled.main`
@@ -22,6 +23,9 @@ const Rudder: React.FunctionComponent = () => (
     <Header />
     <Main>
       <Switch>
+        <Route path="/sprints/new">
+          <SprintCreator />
+        </Route>
         <Route path="/sprints/:id">
           <Goals />
         </Route>

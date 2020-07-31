@@ -32,7 +32,7 @@ const Header: FunctionComponent = () => {
   return (
     <StyledHeader>
       <Heading>Rudder</Heading>
-      {match?.isExact && <Link to="/">Sprints &gt;</Link>}
+      {!match?.isExact && <Link to="/">Sprints &gt;</Link>}
     </StyledHeader>
   );
 };
