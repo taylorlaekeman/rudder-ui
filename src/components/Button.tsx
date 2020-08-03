@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import noop from 'utils/noop';
@@ -37,7 +37,7 @@ type propTypes = {
   type?: 'button' | 'submit';
 };
 
-const Button: React.FunctionComponent<propTypes> = ({
+const Button: FunctionComponent<propTypes> = ({
   area = '',
   children,
   isStruck = false,
