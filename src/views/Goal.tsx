@@ -51,7 +51,9 @@ const Goal: FunctionComponent<propTypes> = ({ goal, sprint }: propTypes) => {
           </Button>
         </>
       ) : (
-        <Button onClick={() => setIsEditing(true)}>{goal.text}</Button>
+        <Button isStruck={goal.isAchieved} onClick={() => setIsEditing(true)}>
+          {goal.text}
+        </Button>
       )}
     </Wrapper>
   );
