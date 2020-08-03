@@ -9,9 +9,9 @@ const StyledButton = styled.button<{ $area: string; $isUnderlined: boolean }>`
   border: none;
   color: ${({ theme }) => theme.colours.text};
   cursor: pointer;
-  font-size: 1.2rem;
   grid-area: ${({ $area }) => $area};
   ${({ $isUnderlined }) => $isUnderlined && 'text-decoration: underline;'}
+  ${({ theme }) => theme.font.medium};
 
   &:hover {
     text-decoration: underline;

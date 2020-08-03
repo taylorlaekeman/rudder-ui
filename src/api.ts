@@ -57,6 +57,31 @@ export const mutations = {
       }
     }
   `,
+  updateGoal: gql`
+    mutation UpdateGoal(
+      $sprint: ID!
+      $goal: ID!
+      $text: String
+      $isAchieved: Boolean
+    ) {
+      updateGoal(
+        input: {
+          sprintId: $sprint
+          goalId: $goal
+          text: $text
+          isAchieved: $isAchieved
+        }
+      ) {
+        id
+        endDate
+        goals {
+          id
+          text
+          isAchieved
+        }
+      }
+    }
+  `,
 };
 
 export const queries = {
