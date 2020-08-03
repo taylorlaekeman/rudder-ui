@@ -48,6 +48,7 @@ const Sprints: FunctionComponent = () => {
 
   return (
     <>
+      <h2>Sprints</h2>
       <Explanation>
         A sprint is a list of goals with a deadline. Pick a date in the near
         future and decide what you want to have finished by that day.

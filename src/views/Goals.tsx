@@ -16,9 +16,10 @@ const Goals: React.FunctionComponent = () => {
 
   return (
     <>
+      <h2>Goals</h2>
       <Form>
         {data?.sprint.goals.map((goal: GoalType) => (
-          <Goal goal={goal} key={goal.id} />
+          <Goal goal={goal} key={goal.id} sprint={id} />
         ))}
       </Form>
       <Adder

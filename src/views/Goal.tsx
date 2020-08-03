@@ -1,6 +1,8 @@
+import { useMutation } from '@apollo/client';
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
+import { mutations } from 'api';
 import Button from 'components/Button';
 import Checkbox from 'components/Form/Checkbox';
 import Input from 'components/Form/Input';
@@ -18,13 +20,26 @@ const Wrapper = styled.div`
 
 type propTypes = {
   goal: GoalType;
+  sprint: string;
 };
 
-const Goal: FunctionComponent<propTypes> = ({ goal }: propTypes) => {
+const Goal: FunctionComponent<propTypes> = ({ goal, sprint }: propTypes) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [updateGoal] = useMutation<{ updateGoal: GoalType }>(
+    mutations.updateGoal
+  );
   return (
     <Wrapper>
-      <Checkbox area="checkbox" value={goal.isAchieved} />
+      <Checkbox
+        area="checkbox"
+        id={goal.id}
+        onChange={(value) =>
+          updateGoal({
+            variables: { goal: goal.id, sprint, isAchieved: value },
+          })
+        }
+        value={goal.isAchieved}
+      />
       {isEditing ? (
         <>
           <Input area="text" value={goal.text} />
@@ -36,7 +51,9 @@ const Goal: FunctionComponent<propTypes> = ({ goal }: propTypes) => {
           </Button>
         </>
       ) : (
-        <Button onClick={() => setIsEditing(true)}>{goal.text}</Button>
+        <Button isStruck={goal.isAchieved} onClick={() => setIsEditing(true)}>
+          {goal.text}
+        </Button>
       )}
     </Wrapper>
   );

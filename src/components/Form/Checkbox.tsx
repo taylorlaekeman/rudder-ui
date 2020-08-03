@@ -24,18 +24,25 @@ const Wrapper = styled.div<{ area: string }>`
 
 type propTypes = {
   area?: string;
-  onChange?: { (): void };
+  id: string;
+  onChange?: { (value: boolean): void };
   value?: boolean;
 };
 
 const Checkbox: React.FunctionComponent<propTypes> = ({
   area = '',
+  id,
   onChange = noop,
   value = false,
 }: propTypes) => (
   <Wrapper area={area}>
-    <Input checked={value} onChange={onChange} type="checkbox" />
-    <Label isChecked={value} />
+    <Input
+      checked={value}
+      id={id}
+      onChange={() => onChange(!value)}
+      type="checkbox"
+    />
+    <Label htmlFor={id} isChecked={value} />
   </Wrapper>
 );
 

@@ -12,6 +12,10 @@ export default createGlobalStyle`
     margin: 0;
   }
 
+  h2 {
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.font.large};
+  }
+
   p {
     ${({ theme }: { theme: typeof themeDefinition }) => theme.font.small};
   }
