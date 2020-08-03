@@ -25,6 +25,7 @@ type propTypes = {
 
 const Goal: FunctionComponent<propTypes> = ({ goal, sprint }: propTypes) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState(goal.text);
   const [updateGoal] = useMutation<{ updateGoal: GoalType }>(
     mutations.updateGoal
   );
@@ -42,8 +43,14 @@ const Goal: FunctionComponent<propTypes> = ({ goal, sprint }: propTypes) => {
       />
       {isEditing ? (
         <>
-          <Input area="text" value={goal.text} />
-          <Button area="save" onClick={() => setIsEditing(false)}>
+          <Input area="text" onChange={setText} value={text} />
+          <Button
+            area="save"
+            onClick={() => {
+              updateGoal({ variables: { goal: goal.id, sprint, text } });
+              setIsEditing(false);
+            }}
+          >
             Save
           </Button>
           <Button area="cancel" onClick={() => setIsEditing(false)}>
