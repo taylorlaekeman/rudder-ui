@@ -5,31 +5,12 @@ import styled from 'styled-components';
 import { queries } from 'api';
 import Link from 'components/Link';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { Sprint } from 'types';
+import type { Sprint } from 'types';
+import { getReadableDate } from 'utils/date';
 
 const Explanation = styled.p`
   ${({ theme }) => theme.font.small}
 `;
-
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-function transformDate(date: string): string {
-  const [year, month, day] = date.split('-');
-  return `${MONTHS[parseInt(month, 10) - 1]} ${day}, ${year}`;
-}
 
 const Sprints: FunctionComponent = () => {
   const { data, loading: isLoading } = useQuery(queries.getSprints);
@@ -37,9 +18,6 @@ const Sprints: FunctionComponent = () => {
 
   const sprints = data?.sprints;
 
-  const finishedSprints = sprints?.filter(
-    (sprint: Sprint) => currentDate > new Date(sprint.endDate)
-  );
   const currentSprints = sprints?.filter(
     (sprint: Sprint) => currentDate < new Date(sprint.endDate)
   );
@@ -55,15 +33,11 @@ const Sprints: FunctionComponent = () => {
       </Explanation>
       {currentSprints?.map((sprint: Sprint) => (
         <Link key={sprint.id} isStruck={false} to={`/sprints/${sprint.id}`}>
-          {transformDate(sprint.endDate)}
+          {getReadableDate(sprint.endDate)}
         </Link>
       ))}
       <Link to="/sprints/new">+ Start a sprint</Link>
-      {finishedSprints?.map((sprint: Sprint) => (
-        <Link key={sprint.id} isStruck to={`/sprints/${sprint.id}`}>
-          {transformDate(sprint.endDate)}
-        </Link>
-      ))}
+      <Link to="/sprints/finished">Finished sprints &gt;</Link>
     </>
   );
 };
