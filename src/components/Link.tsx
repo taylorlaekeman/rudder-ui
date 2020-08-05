@@ -6,7 +6,6 @@ const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
   color: ${({ theme }) => theme.colours.text};
   display: block;
   font-size: 1.2rem;
-  padding: 16px;
   text-decoration: ${({ $isStruck }) =>
     $isStruck ? 'line-through 2px' : 'none'};
   ${({ theme }) => theme.font.medium}
