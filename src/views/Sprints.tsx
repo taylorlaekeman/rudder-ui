@@ -5,21 +5,21 @@ import styled from 'styled-components';
 import { queries } from 'api';
 import Link from 'components/Link';
 import LoadingIndicator from 'components/LoadingIndicator';
-import type { Sprint } from 'types';
-import { getReadableDate } from 'utils/date';
-
-const Explanation = styled.p`
-  ${({ theme }) => theme.font.small}
-`;
+import type { Sprint as SprintType } from 'types';
+import Sprint from 'views/Sprint';
 
 const Sprints: FunctionComponent = () => {
   const { data, loading: isLoading } = useQuery(queries.getSprints);
-  const currentDate = new Date();
 
-  const sprints = data?.sprints;
+  const sprints = data?.sprints || [];
+  const copiedSprints = [...sprints];
+  const sortedSprints = copiedSprints?.sort((a: SprintType, b: SprintType) =>
+    new Date(a.endDate) < new Date(b.endDate) ? 1 : -1
+  );
+  const visibleSprints = sortedSprints.slice(0, 3);
 
-  const currentSprints = sprints?.filter(
-    (sprint: Sprint) => currentDate < new Date(sprint.endDate)
+  const hasActiveSprint = sortedSprints.some(
+    (sprint) => new Date(sprint.endDate) > new Date()
   );
 
   if (isLoading) return <LoadingIndicator />;
@@ -27,19 +27,29 @@ const Sprints: FunctionComponent = () => {
   return (
     <>
       <h2>Sprints</h2>
-      <Explanation>
+      <Explanation $hasActiveSprint={hasActiveSprint}>
         A sprint is a list of goals with a deadline. Pick a date in the near
         future and decide what you want to have finished by that day.
       </Explanation>
-      {currentSprints?.map((sprint: Sprint) => (
-        <Link key={sprint.id} isStruck={false} to={`/sprints/${sprint.id}`}>
-          {getReadableDate(sprint.endDate)}
-        </Link>
-      ))}
-      <Link to="/sprints/new">+ Start a sprint</Link>
-      <Link to="/sprints/finished">Finished sprints &gt;</Link>
+      {!hasActiveSprint && <Link to="/sprints/new">+ Start a sprint</Link>}
+      <List>
+        {visibleSprints?.map((sprint: SprintType) => (
+          <Sprint key={sprint.id} sprint={sprint} />
+        ))}
+      </List>
     </>
   );
 };
+
+const Explanation = styled.p<{ $hasActiveSprint?: boolean }>`
+  padding-top: 8px;
+  padding-bottom: ${({ $hasActiveSprint }) =>
+    $hasActiveSprint ? '0' : '32px'};
+  ${({ theme }) => theme.font.small}
+`;
+
+const List = styled.ul`
+  padding-top: 32px;
+`;
 
 export default Sprints;

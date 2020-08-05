@@ -92,8 +92,8 @@ export const queries = {
         endDate
         goals {
           id
-          text
           isAchieved
+          text
         }
       }
     }
@@ -105,6 +105,7 @@ export const queries = {
         endDate
         goals {
           id
+          isAchieved
           text
         }
       }
