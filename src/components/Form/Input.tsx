@@ -5,13 +5,13 @@ import noop from 'utils/noop';
 
 const StyledInput = styled.input<{ area: string }>`
   background: none;
-  border: solid ${({ theme }) => theme.colours.border} 1px;
+  border: none;
+  border-bottom: solid ${({ theme }) => theme.colours.border} 1px;
   color: ${({ theme }) => theme.colours.text};
-  font-size: 1.2rem;
   grid-area: ${({ area }) => area};
   outline: none;
-  padding: 16px;
   width: 100%;
+  ${({ theme }) => theme.font.medium};
 `;
 
 type propTypes = {
