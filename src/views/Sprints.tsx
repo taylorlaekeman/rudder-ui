@@ -6,6 +6,7 @@ import { queries } from 'api';
 import Link from 'components/Link';
 import LoadingIndicator from 'components/LoadingIndicator';
 import type { Sprint as SprintType } from 'types';
+import { isSprintActive } from 'utils/date';
 import Sprint from 'views/Sprint';
 
 const Sprints: FunctionComponent = () => {
@@ -16,9 +17,7 @@ const Sprints: FunctionComponent = () => {
     new Date(a.endDate) < new Date(b.endDate) ? 1 : -1
   );
 
-  const hasActiveSprint = sprints.some(
-    (sprint: SprintType) => new Date(sprint.endDate) > new Date()
-  );
+  const hasActiveSprint = sprints.some(isSprintActive);
 
   if (isLoading) return <LoadingIndicator />;
 

@@ -1,3 +1,5 @@
+import type { Sprint } from 'types';
+
 export function countDaysBetween(earlier: Date, later: Date): number {
   const timeBetween = later.valueOf() - earlier.valueOf();
   return Math.ceil(timeBetween / ONE_DAY);
@@ -25,7 +27,16 @@ const MONTHS = [
   'December',
 ];
 
+export function isSprintActive(sprint: Sprint): boolean {
+  const endDate = new Date(sprint.endDate);
+  endDate.setDate(endDate.getDate() + 1);
+  endDate.setHours(24);
+  const today = new Date();
+  return endDate > today;
+}
+
 export default {
   countDaysBetween,
   getReadableDate,
+  isSprintActive,
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Link from 'components/Link';
 import type { Sprint as SprintType } from 'types';
-import { countDaysBetween, getReadableDate } from 'utils/date';
+import { countDaysBetween, getReadableDate, isSprintActive } from 'utils/date';
 
 type propTypes = {
   sprint: SprintType;
@@ -15,7 +15,7 @@ const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
   const today = new Date();
 
   const daysLeft = countDaysBetween(today, endDate);
-  const isActive = new Date(sprint.endDate) > new Date();
+  const isActive = isSprintActive(sprint);
 
   return (
     <Link to={`/sprints/${sprint.id}`}>
