@@ -45,7 +45,7 @@ const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
 };
 
 const Wrapper = styled.div`
-  padding-bottom: 32px;
+  margin-bottom: 32px;
 `;
 
 const EndDate = styled.h3<{ $isActive: boolean }>`
