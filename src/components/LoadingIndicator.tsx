@@ -3,30 +3,31 @@ import styled from 'styled-components';
 
 import { ReactComponent as UnstyledCog } from 'assets/icons/cog.svg';
 
-const Cog = styled(UnstyledCog)`
-  animation: spin 2s linear infinite;
-  fill: ${({ theme }) => theme.colours.icon};
-  width: 32px;
+type propTypes = {
+  isLarge?: boolean;
+};
 
-  @keyframes spin {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`;
+const LoadingIndicator: FunctionComponent<propTypes> = ({
+  isLarge = false,
+}: propTypes) => (
+  <Wrapper $isLarge={isLarge}>
+    <Cog $isLarge={isLarge} />
+  </Wrapper>
+);
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $isLarge: boolean }>`
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 32px;
   width: 100%;
+  ${({ $isLarge }) => $isLarge && 'padding: 32px;'}
 `;
 
-const LoadingIndicator: FunctionComponent = () => (
-  <Wrapper>
-    <Cog />
-  </Wrapper>
-);
+const Cog = styled(UnstyledCog)<{ $isLarge: boolean }>`
+  fill: ${({ theme }) => theme.colours.icon};
+  width: ${({ $isLarge }) => ($isLarge ? '32px' : '16px')};
+  ${({ theme }) => theme.animations.fadein}
+  ${({ theme }) => theme.animations.spin}
+`;
 
 export default LoadingIndicator;
