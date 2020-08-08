@@ -44,7 +44,7 @@ const Goal: FunctionComponent<propTypes> = ({
         });
       }
     }
-  }, [debouncedText]);
+  }, [addGoal, debouncedText, goal, isAdding, sprint, updateGoal]);
 
   useEffect(() => {
     if (isAddCalled && !isAddLoading) setText('');

@@ -14,7 +14,7 @@ export function useDebounce(
     return () => {
       clearTimeout(timeout);
     };
-  }, [value]);
+  }, [delay, value]);
 
   return debouncedValue;
 }
