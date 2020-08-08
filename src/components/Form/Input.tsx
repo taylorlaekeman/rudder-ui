@@ -34,7 +34,6 @@ const Input: React.FunctionComponent<propTypes> = ({
 const StyledInput = styled.input<{ area: string; $isStruck: boolean }>`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colours.text};
   grid-area: ${({ area }) => area};
   outline: none;
   width: 100%;
@@ -42,7 +41,7 @@ const StyledInput = styled.input<{ area: string; $isStruck: boolean }>`
   ${({ theme }) => theme.font.medium};
 
   &::placeholder {
-    color: ${({ theme }) => theme.colours.text};
+    color: ${({ theme }) => theme.colours.text.placeholder};
     font-style: italic;
     opacity: 1;
   }

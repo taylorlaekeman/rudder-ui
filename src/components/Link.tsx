@@ -3,7 +3,6 @@ import { Link as UnstyledLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
-  color: ${({ theme }) => theme.colours.text};
   display: block;
   font-size: 1.2rem;
   text-decoration: ${({ $isStruck }) =>

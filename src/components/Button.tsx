@@ -13,7 +13,6 @@ const StyledButton = styled.button<{
   background: none;
   border: none;
   border-bottom: solid white 1px;
-  color: ${({ theme }) => theme.colours.text};
   cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
   grid-area: ${({ $area }) => $area};
   ${({ theme }) => theme.font.medium};
