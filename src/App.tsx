@@ -8,6 +8,8 @@ import GlobalStyles from 'styles/GlobalStyle';
 import theme from 'styles/theme';
 import Rudder from 'views/Rudder';
 
+console.log(`connecting to ${settings.API_URL}`);
+
 const client = new ApolloClient({
   uri: settings.API_URL,
   cache: new InMemoryCache(),
