@@ -74,7 +74,7 @@ const Goal: FunctionComponent<propTypes> = ({
         isStruck={goal.isAchieved}
         onChange={setText}
         onKeyDown={(key: number) => {
-          if (text === '' && key === BACKSPACE)
+          if (text === '' && key === BACKSPACE && !isAdding)
             deleteGoal({ variables: { goal: goal.id, sprint } });
         }}
         placeholder="start typing to add a goal"
