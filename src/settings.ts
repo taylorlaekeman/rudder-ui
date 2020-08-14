@@ -1,3 +1,3 @@
 export default {
-  API_URL: 'https://api.rudder.to/graphql',
+  API_URL: 'https://api.rudder.to',
 };
