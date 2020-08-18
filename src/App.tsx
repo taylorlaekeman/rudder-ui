@@ -9,7 +9,7 @@ import theme from 'styles/theme';
 import Rudder from 'views/Rudder';
 
 const client = new ApolloClient({
-  uri: settings.API_URL,
+  uri: `${settings.API_URL}/graphql`,
   cache: new InMemoryCache(),
 });
 
