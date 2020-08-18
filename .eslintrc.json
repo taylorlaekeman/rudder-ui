@@ -41,6 +41,7 @@
   "plugins": [
     "prettier",
     "react",
+    "react-hooks",
     "@typescript-eslint"
   ],
   "rules": {
@@ -59,6 +60,8 @@
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, {"extensions": [".ts", ".tsx"]}],
     "react/jsx-curly-newline": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/rules-of-hooks": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error"
   },

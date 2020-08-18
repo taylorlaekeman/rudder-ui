@@ -1,35 +1,45 @@
-import { useMutation, useQuery } from '@apollo/client';
-import React from 'react';
+import { useQuery } from '@apollo/client';
+import React, { FunctionComponent } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { mutations, queries } from 'api';
-import Adder from 'components/Adder';
+import { queries } from 'api';
 import Form from 'components/Form';
+import LoadingIndicator from 'components/LoadingIndicator';
 import { Goal as GoalType } from 'types';
+import { getReadableDate } from 'utils/date';
 import Goal from 'views/Goal';
 
-const Goals: React.FunctionComponent = () => {
+const Goals: FunctionComponent = () => {
   const { id } = useParams();
 
-  const { data } = useQuery(queries.getSprint, { variables: { id } });
-  const [addGoal] = useMutation(mutations.addGoal);
+  const { data, loading: isLoading } = useQuery(queries.getSprint, {
+    variables: { id },
+  });
+
+  if (isLoading) return <LoadingIndicator isLarge />;
 
   return (
     <>
-      <h2>Goals</h2>
+      <Title>{getReadableDate(data?.sprint?.endDate)}</Title>
       <Form>
         {data?.sprint.goals.map((goal: GoalType) => (
           <Goal goal={goal} key={goal.id} sprint={id} />
         ))}
+        <Goal goal={EMPTY_GOAL} isAdding sprint={id} />
       </Form>
-      <Adder
-        onAdd={(text) =>
-          addGoal({ variables: { sprint: data?.sprint.id, text } })
-        }
-        text="+ Add a goal"
-      />
     </>
   );
+};
+
+const Title = styled.h2`
+  padding-bottom: 32px;
+`;
+
+const EMPTY_GOAL = {
+  id: 'empty',
+  isAchieved: false,
+  text: '',
 };
 
 export default Goals;

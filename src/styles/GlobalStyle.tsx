@@ -12,11 +12,13 @@ export default createGlobalStyle`
 
   h2 {
     ${({ theme }: { theme: typeof themeDefinition }) => theme.font.large};
-    color: ${({ theme }) => theme.colours.text};
   }
 
   p {
     ${({ theme }: { theme: typeof themeDefinition }) => theme.font.small};
-    color: ${({ theme }) => theme.colours.text};
+  }
+
+  a, button, h1, h2, input, p {
+    color: ${({ theme }) => theme.colours.text.body};
   }
 `;

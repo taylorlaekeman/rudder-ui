@@ -13,7 +13,6 @@ const StyledHeader = styled.header`
 `;
 
 const Heading = styled.h1`
-  color: ${({ theme }) => theme.colours.text};
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 1px;
