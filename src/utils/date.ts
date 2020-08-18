@@ -1,5 +1,9 @@
-export function countDaysBetween(earlier: Date, later: Date): number {
-  const timeBetween = later.valueOf() - earlier.valueOf();
+import type { Sprint } from 'types';
+
+export function countDaysLeftInSprint(sprint: Sprint): number {
+  const endDate = parseEndDate(sprint);
+  const now = new Date();
+  const timeBetween = endDate.valueOf() - now.valueOf();
   return Math.ceil(timeBetween / ONE_DAY);
 }
 
@@ -25,7 +29,22 @@ const MONTHS = [
   'December',
 ];
 
+export function isSprintActive(sprint: Sprint): boolean {
+  const endDate = parseEndDate(sprint);
+  const today = new Date();
+  return endDate > today;
+}
+
+export function parseEndDate(sprint: Sprint): Date {
+  const endDate = new Date(sprint.endDate);
+  endDate.setDate(endDate.getDate() + 1);
+  endDate.setHours(24);
+  return endDate;
+}
+
 export default {
-  countDaysBetween,
+  countDaysLeftInSprint,
   getReadableDate,
+  isSprintActive,
+  parseEndDate,
 };

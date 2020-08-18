@@ -5,14 +5,15 @@ import noop from 'utils/noop';
 
 const StyledButton = styled.button<{
   $area: string;
+  $isText: boolean;
   $isStruck: boolean;
   $isUnderlined: boolean;
 }>`
   appearance: none;
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colours.text};
-  cursor: pointer;
+  border-bottom: solid white 1px;
+  cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
   grid-area: ${({ $area }) => $area};
   ${({ theme }) => theme.font.medium};
   ${({ $isStruck, $isUnderlined }) => {
@@ -24,13 +25,14 @@ const StyledButton = styled.button<{
   }}
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
   }
 `;
 
 type propTypes = {
   area?: string;
   children: React.ReactNode;
+  isText?: boolean;
   isStruck?: boolean;
   isUnderlined?: boolean;
   onClick?: { (): void };
@@ -40,6 +42,7 @@ type propTypes = {
 const Button: FunctionComponent<propTypes> = ({
   area = '',
   children,
+  isText = false,
   isStruck = false,
   isUnderlined = false,
   onClick = noop,
@@ -47,6 +50,7 @@ const Button: FunctionComponent<propTypes> = ({
 }: propTypes) => (
   <StyledButton
     $area={area}
+    $isText={isText}
     $isStruck={isStruck}
     $isUnderlined={isUnderlined}
     onClick={onClick}

@@ -3,7 +3,11 @@ import styled from 'styled-components';
 
 import Link from 'components/Link';
 import type { Sprint as SprintType } from 'types';
-import { countDaysBetween, getReadableDate } from 'utils/date';
+import {
+  countDaysLeftInSprint,
+  getReadableDate,
+  isSprintActive,
+} from 'utils/date';
 
 type propTypes = {
   sprint: SprintType;
@@ -11,11 +15,8 @@ type propTypes = {
 
 const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
   const achievedGoals = sprint.goals.filter((goal) => goal.isAchieved);
-  const endDate = new Date(sprint.endDate);
-  const today = new Date();
-
-  const daysLeft = countDaysBetween(today, endDate);
-  const isActive = new Date(sprint.endDate) > new Date();
+  const daysLeft = countDaysLeftInSprint(sprint);
+  const isActive = isSprintActive(sprint);
 
   return (
     <Link to={`/sprints/${sprint.id}`}>
@@ -45,7 +46,7 @@ const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
 };
 
 const Wrapper = styled.div`
-  padding-bottom: 32px;
+  margin-bottom: 32px;
 `;
 
 const EndDate = styled.h3<{ $isActive: boolean }>`
