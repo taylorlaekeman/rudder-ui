@@ -95,6 +95,11 @@ export const mutations = {
       }
     }
   `,
+  registerEmail: gql`
+    mutation RegisterEmail($email: String!) {
+      registerEmail(input: { email: $email })
+    }
+  `,
 };
 
 export const queries = {
