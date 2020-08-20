@@ -1,49 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
+import LoadingIndicator from 'components/LoadingIndicator';
 import noop from 'utils/noop';
-
-const StyledButton = styled.button<{
-  $area: string;
-  $isText: boolean;
-  $isStruck: boolean;
-  $isUnderlined: boolean;
-}>`
-  appearance: none;
-  background: none;
-  border: none;
-  border-bottom: solid white 1px;
-  cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
-  grid-area: ${({ $area }) => $area};
-  ${({ theme }) => theme.font.medium};
-  ${({ $isStruck, $isUnderlined }) => {
-    if ($isStruck && $isUnderlined)
-      return 'text-decoration: underline line-through;';
-    if ($isStruck) return 'text-decoration: line-through;';
-    if ($isUnderlined) return 'text-decoration: underline';
-    return '';
-  }}
-
-  &:hover {
-    text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
-  }
-`;
-
-type propTypes = {
-  area?: string;
-  children: React.ReactNode;
-  isText?: boolean;
-  isStruck?: boolean;
-  isUnderlined?: boolean;
-  onClick?: { (): void };
-  type?: 'button' | 'submit';
-};
 
 const Button: FunctionComponent<propTypes> = ({
   area = '',
   children,
-  isText = false,
+  isLoading = false,
   isStruck = false,
+  isText = false,
   isUnderlined = false,
   onClick = noop,
   type = 'button',
@@ -56,14 +22,51 @@ const Button: FunctionComponent<propTypes> = ({
     onClick={onClick}
     type={type}
   >
-    {children}
+    {isLoading ? <LoadingIndicator /> : children}
   </StyledButton>
 );
 
-Button.defaultProps = {
-  area: '',
-  onClick: noop,
-  type: 'button',
+type propTypes = {
+  area?: string;
+  children: React.ReactNode;
+  isLoading?: boolean;
+  isStruck?: boolean;
+  isText?: boolean;
+  isUnderlined?: boolean;
+  onClick?: { (): void };
+  type?: 'button' | 'submit';
 };
+
+const StyledButton = styled.button<{
+  $area: string;
+  $isText: boolean;
+  $isStruck: boolean;
+  $isUnderlined: boolean;
+}>`
+  align-items: center;
+  appearance: none;
+  background-color: ${({ theme }) => theme.colours.background.button};
+  border: none;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colours.text.button};
+  cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
+  display: flex;
+  grid-area: ${({ $area }) => $area};
+  padding: 8px 16px;
+
+  ${({ theme }) => theme.font.medium};
+  ${({ $isStruck, $isUnderlined }) => {
+    if ($isStruck && $isUnderlined)
+      return 'text-decoration: underline line-through;';
+    if ($isStruck) return 'text-decoration: line-through;';
+    if ($isUnderlined) return 'text-decoration: underline';
+    return '';
+  }}
+
+  &:focus, &:hover {
+    outline: none;
+    text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
+  }
+`;
 
 export default Button;
