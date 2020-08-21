@@ -47,7 +47,8 @@ const Form = styled(UnstyledForm)`
     'input  input'
     'button .    ';
   grid-template-columns: max-content 1fr;
-  margin-top: 256px;
+  margin-top: 128px;
+  max-width: 256px;
 `;
 
 const Success = styled.p`
