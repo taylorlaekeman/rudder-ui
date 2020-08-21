@@ -45,10 +45,10 @@ const StyledButton = styled.button<{
 }>`
   align-items: center;
   appearance: none;
-  background-color: ${({ theme }) => theme.colours.background.button};
+  background-color: ${({ theme }) => theme.colours.background.button.normal};
   border: none;
   border-radius: 4px;
-  color: ${({ theme }) => theme.colours.text.button};
+  color: ${({ theme }) => theme.colours.text.button.normal};
   cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
   display: flex;
   grid-area: ${({ $area }) => $area};
@@ -64,6 +64,8 @@ const StyledButton = styled.button<{
   }}
 
   &:focus, &:hover {
+    background-color: ${({ theme }) => theme.colours.background.button.focus};
+    color: ${({ theme }) => theme.colours.text.button.focus};
     outline: none;
     text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
   }

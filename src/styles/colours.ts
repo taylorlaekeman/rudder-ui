@@ -17,7 +17,10 @@ const palette = {
 
 export default {
   background: {
-    button: palette.brand[100],
+    button: {
+      focus: palette.brand[900],
+      normal: palette.brand[100],
+    },
   },
   border: {
     input: {
@@ -29,7 +32,10 @@ export default {
   fill: palette.brand[900],
   icon: palette.brand[900],
   text: {
-    button: palette.brand[900],
+    button: {
+      focus: palette.brand[100],
+      normal: palette.brand[900],
+    },
     input: {
       error: palette.error[900],
       focus: palette.brand[900],
