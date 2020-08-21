@@ -17,7 +17,6 @@ const Heading = styled.h1`
   font-weight: 900;
   letter-spacing: 1px;
   margin: 0;
-  text-transform: uppercase;
 
   @media (min-width: 732px) {
     font-size: 3rem;

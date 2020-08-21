@@ -3,10 +3,10 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { mutations } from 'api';
-import { ReactComponent as UnstyledCheckmark } from 'assets/icons/checkmark.svg';
 import Checkbox from 'components/Form/Checkbox';
 import Input, { BACKSPACE } from 'components/Form/Input';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Checkmark from 'components/logos/Checkmark';
 import { Goal as GoalType } from 'types';
 import { useDebounce } from 'hooks';
 
@@ -94,12 +94,6 @@ const Wrapper = styled.div`
   grid-template-columns: max-content 1fr max-content max-content;
   justify-items: start;
   margin-bottom: 16px;
-`;
-
-const Checkmark = styled(UnstyledCheckmark)`
-  fill: ${({ theme }) => theme.colours.logo};
-  width: 16px;
-  ${({ theme }) => theme.animations.fadein}
 `;
 
 export default Goal;

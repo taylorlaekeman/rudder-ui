@@ -3,47 +3,119 @@ import styled from 'styled-components';
 
 import noop from 'utils/noop';
 
-type propTypes = {
-  area?: string;
-  isStruck?: boolean;
-  onChange?: { (value: string): void };
-  onKeyDown?: { (value: number): void };
-  placeholder?: string;
-  value?: string;
-};
-
 const Input: React.FunctionComponent<propTypes> = ({
   area = '',
+  hasError = false,
   isStruck = false,
+  label = '',
   onChange = noop,
   onKeyDown = noop,
   placeholder = '',
+  type = 'text',
   value = '',
 }: propTypes) => (
-  <StyledInput
-    area={area}
-    $isStruck={isStruck}
-    onChange={(event) => onChange(event.target.value)}
-    onKeyDown={(event) => onKeyDown(event.keyCode)}
-    placeholder={placeholder}
-    type="text"
-    value={value}
-  />
+  <Wrapper $area={area} $hasError={hasError}>
+    <StyledInput
+      $hasError={hasError}
+      id={label}
+      $isStruck={isStruck}
+      onChange={(event) => onChange(event.target.value)}
+      onKeyDown={(event) => onKeyDown(event.keyCode)}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+    />
+    {label && (
+      <Label $hasError={hasError} htmlFor={label}>
+        {label}
+      </Label>
+    )}
+  </Wrapper>
 );
 
-const StyledInput = styled.input<{ area: string; $isStruck: boolean }>`
+type propTypes = {
+  area?: string;
+  hasError?: boolean;
+  isStruck?: boolean;
+  label?: string;
+  onChange?: { (value: string): void };
+  onKeyDown?: { (value: number): void };
+  placeholder?: string;
+  type?: 'text' | 'email';
+  value?: string;
+};
+
+const Wrapper = styled.div<{ $area: string; $hasError: boolean }>`
+  display: flex;
+  flex-direction: column;
+  grid-area: ${({ $area }) => $area};
+  margin-bottom: 32px;
+
+  &:focus-within > label {
+    color: ${({ $hasError, theme }) =>
+      $hasError ? theme.colours.text.error : theme.colours.text.input.focus};
+  }
+`;
+
+const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
   background: none;
   border: none;
-  grid-area: ${({ area }) => area};
+  border-bottom: solid
+    ${({ $hasError, theme }) =>
+      $hasError
+        ? theme.colours.border.input.error
+        : theme.colours.border.input.normal}
+    1px;
+  color: ${({ $hasError, theme }) =>
+    $hasError
+      ? theme.colours.text.input.error
+      : theme.colours.text.input.normal};
   outline: none;
+  padding: 8px;
   width: 100%;
   ${({ $isStruck }) => $isStruck && 'text-decoration: line-through;'}
   ${({ theme }) => theme.font.medium};
 
+  &:focus {
+    border-bottom: solid
+      ${({ $hasError, theme }) =>
+        $hasError
+          ? theme.colours.border.input.error
+          : theme.colours.border.input.focus}
+      1px;
+    color: ${({ $hasError, theme }) =>
+      $hasError
+        ? theme.colours.text.input.error
+        : theme.colours.text.input.focus};
+  }
+
   &::placeholder {
-    color: ${({ theme }) => theme.colours.text.placeholder};
+    color: ${({ $hasError, theme }) =>
+      $hasError
+        ? theme.colours.text.input.error
+        : theme.colours.text.input.placeholder};
     font-style: italic;
     opacity: 1;
+  }
+`;
+
+const Label = styled.label<{ $hasError: boolean }>`
+  align-self: end;
+  color: ${({ $hasError, theme }) =>
+    $hasError
+      ? theme.colours.text.label.error
+      : theme.colours.text.label.normal};
+  display: inline-block;
+  font-style: italic;
+  padding: 0 8px;
+
+  ${({ theme }) => theme.font.small}
+
+  &:focus {
+    color: ${({ $hasError, theme }) =>
+      $hasError
+        ? theme.colours.text.label.error
+        : theme.colours.text.label.focus};
   }
 `;
 

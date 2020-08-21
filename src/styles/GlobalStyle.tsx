@@ -18,7 +18,7 @@ export default createGlobalStyle`
     ${({ theme }: { theme: typeof themeDefinition }) => theme.font.small};
   }
 
-  a, button, h1, h2, input, p {
-    color: ${({ theme }) => theme.colours.text.body};
+  a, h1, h2, p {
+    color: ${({ theme }) => theme.colours.text.normal};
   }
 `;
