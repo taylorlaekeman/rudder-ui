@@ -29,8 +29,10 @@ export default {
       normal: palette.brand[700],
     },
   },
-  fill: palette.brand[900],
-  icon: palette.brand[900],
+  icon: {
+    focus: palette.brand[100],
+    normal: palette.brand[900],
+  },
   text: {
     button: {
       focus: palette.brand[100],

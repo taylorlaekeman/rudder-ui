@@ -6,7 +6,7 @@ import { mutations } from 'api';
 import Checkbox from 'components/Form/Checkbox';
 import Input, { BACKSPACE } from 'components/Form/Input';
 import LoadingIndicator from 'components/LoadingIndicator';
-import Checkmark from 'components/logos/Checkmark';
+import Checkmark from 'components/icons/Checkmark';
 import { Goal as GoalType } from 'types';
 import { useDebounce } from 'hooks';
 
