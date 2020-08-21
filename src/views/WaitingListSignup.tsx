@@ -6,7 +6,7 @@ import { mutations } from 'api';
 import Button from 'components/Button';
 import UnstyledForm from 'components/Form';
 import Input from 'components/Form/Input';
-import Checkmark from 'components/logos/Checkmark';
+import Checkmark from 'components/icons/Checkmark';
 
 const WaitingListSignup: FunctionComponent = () => {
   const [email, setEmail] = useState('');

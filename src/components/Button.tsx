@@ -68,6 +68,10 @@ const StyledButton = styled.button<{
     color: ${({ theme }) => theme.colours.text.button.focus};
     outline: none;
     text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
+
+    svg {
+      fill: ${({ theme }) => theme.colours.icon.focus};
+    }
   }
 `;
 

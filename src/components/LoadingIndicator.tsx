@@ -24,7 +24,7 @@ const Wrapper = styled.div<{ $isLarge: boolean }>`
 `;
 
 const Cog = styled(UnstyledCog)<{ $isLarge: boolean }>`
-  fill: ${({ theme }) => theme.colours.icon};
+  fill: ${({ theme }) => theme.colours.icon.normal};
   width: ${({ $isLarge }) => ($isLarge ? '32px' : '16px')};
   ${({ theme }) => theme.animations.fadein}
   ${({ theme }) => theme.animations.spin}
