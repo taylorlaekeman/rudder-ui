@@ -17,7 +17,7 @@ const WaitingListSignup: FunctionComponent = () => {
 
   return (
     <Form onSubmit={() => registerEmail({ variables: { email } })}>
-      {data ? (
+      {data && !error ? (
         <Success>Thanks for joining the waiting list!</Success>
       ) : (
         <Input
@@ -30,7 +30,7 @@ const WaitingListSignup: FunctionComponent = () => {
           value={email}
         />
       )}
-      {data ? (
+      {data && !error ? (
         <Checkmark />
       ) : (
         <Button area="button" isLoading={isLoading} type="submit">
@@ -47,7 +47,8 @@ const Form = styled(UnstyledForm)`
     'input  input'
     'button .    ';
   grid-template-columns: max-content 1fr;
-  margin-top: 256px;
+  margin-top: 128px;
+  max-width: 300px;
 `;
 
 const Success = styled.p`

@@ -46,6 +46,7 @@ type propTypes = {
 };
 
 const Wrapper = styled.div<{ $area: string; $hasError: boolean }>`
+  align-items: flex-end;
   display: flex;
   flex-direction: column;
   grid-area: ${({ $area }) => $area};
@@ -70,6 +71,7 @@ const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
     $hasError
       ? theme.colours.text.input.error
       : theme.colours.text.input.normal};
+  border-radius: 0;
   outline: none;
   padding: 8px;
   width: 100%;
@@ -108,6 +110,7 @@ const Label = styled.label<{ $hasError: boolean }>`
   display: inline-block;
   font-style: italic;
   padding: 0 8px;
+  width: max-content;
 
   ${({ theme }) => theme.font.small}
 
