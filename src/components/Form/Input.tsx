@@ -102,6 +102,7 @@ const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
 `;
 
 const Label = styled.label<{ $hasError: boolean }>`
+  align-self: end;
   color: ${({ $hasError, theme }) =>
     $hasError
       ? theme.colours.text.label.error
