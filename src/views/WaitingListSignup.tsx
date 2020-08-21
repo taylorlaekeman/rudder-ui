@@ -17,7 +17,7 @@ const WaitingListSignup: FunctionComponent = () => {
 
   return (
     <Form onSubmit={() => registerEmail({ variables: { email } })}>
-      {data ? (
+      {(data && !error) ? (
         <Success>Thanks for joining the waiting list!</Success>
       ) : (
         <Input
@@ -30,7 +30,7 @@ const WaitingListSignup: FunctionComponent = () => {
           value={email}
         />
       )}
-      {data ? (
+      {(data && !error) ? (
         <Checkmark />
       ) : (
         <Button area="button" isLoading={isLoading} type="submit">
