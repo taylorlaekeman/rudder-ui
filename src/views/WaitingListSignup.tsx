@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { mutations } from 'api';
@@ -7,6 +7,7 @@ import Button from 'components/Button';
 import UnstyledForm from 'components/Form';
 import Input from 'components/Form/Input';
 import Checkmark from 'components/icons/Checkmark';
+import analytics from 'utils/analytics';
 
 const WaitingListSignup: FunctionComponent = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,10 @@ const WaitingListSignup: FunctionComponent = () => {
     registerEmail,
     { data, error, loading: isLoading },
   ] = useMutation(mutations.registerEmail, { errorPolicy: 'all' });
+
+  useEffect(() => {
+    if (data) analytics.logWaitingListSignup();
+  }, [data]);
 
   return (
     <Form onSubmit={() => registerEmail({ variables: { email } })}>
