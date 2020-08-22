@@ -16,9 +16,11 @@ const WaitingListSignup: FunctionComponent = () => {
     { data, error, loading: isLoading },
   ] = useMutation(mutations.registerEmail, { errorPolicy: 'all' });
 
+  const hasRegistered = data && !error;
+
   useEffect(() => {
-    if (data) analytics.logWaitingListSignup();
-  }, [data]);
+    if (hasRegistered) analytics.logWaitingListSignup();
+  }, [hasRegistered]);
 
   return (
     <Form onSubmit={() => registerEmail({ variables: { email } })}>
@@ -35,7 +37,7 @@ const WaitingListSignup: FunctionComponent = () => {
           value={email}
         />
       )}
-      {data && !error ? (
+      {hasRegistered ? (
         <Checkmark />
       ) : (
         <Button area="button" isLoading={isLoading} type="submit">
