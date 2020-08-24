@@ -1,4 +1,5 @@
 import type { Sprint } from 'types';
+import padWithZero from 'utils/padWithZero';
 
 export function countDaysLeftInSprint(sprint: Sprint): number {
   const endDate = parseEndDate(sprint);
@@ -14,7 +15,30 @@ export function getReadableDate(date: string): string {
   return `${MONTHS[parseInt(month, 10) - 1]} ${day}, ${year}`;
 }
 
-const MONTHS = [
+export function getWeekStructure(year: number, month: number): number[][] {
+  const result: number[][] = [];
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  result.push([]);
+  let week = 0;
+  for (let day = 1 - firstDay.getDay(); day <= lastDay.getDate(); day += 1) {
+    if (result[week].length === 7) {
+      result.push([]);
+      week += 1;
+    }
+    result[week].push(day);
+  }
+  while (result[week].length < 7) result[week].push(-10);
+  return result;
+}
+
+export function isSprintActive(sprint: Sprint): boolean {
+  const endDate = parseEndDate(sprint);
+  const today = new Date();
+  return endDate > today;
+}
+
+export const MONTHS = [
   'January',
   'February',
   'March',
@@ -29,12 +53,6 @@ const MONTHS = [
   'December',
 ];
 
-export function isSprintActive(sprint: Sprint): boolean {
-  const endDate = parseEndDate(sprint);
-  const today = new Date();
-  return endDate > today;
-}
-
 export function parseEndDate(sprint: Sprint): Date {
   const endDate = new Date(sprint.endDate);
   endDate.setDate(endDate.getDate() + 1);
@@ -42,9 +60,19 @@ export function parseEndDate(sprint: Sprint): Date {
   return endDate;
 }
 
+export const TODAY = new Date();
+
+export const TODAY_READABLE = `${TODAY.getFullYear()}-${padWithZero(
+  TODAY.getMonth() + 1
+)}-${padWithZero(TODAY.getDate())}`;
+
 export default {
   countDaysLeftInSprint,
   getReadableDate,
+  getWeekStructure,
   isSprintActive,
+  MONTHS,
   parseEndDate,
+  TODAY,
+  TODAY_READABLE,
 };

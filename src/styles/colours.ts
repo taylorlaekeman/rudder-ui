@@ -35,6 +35,7 @@ export default {
   },
   text: {
     button: {
+      disabled: palette.brand[300],
       focus: palette.brand[100],
       normal: palette.brand[900],
     },

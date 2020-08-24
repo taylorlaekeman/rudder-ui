@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useEffect } from 'react';
-// import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
+import settings from 'settings';
 import analytics from 'utils/analytics';
-// import Goals from 'views/Goals';
+import Goals from 'views/Goals';
 import Header from 'views/Header';
-// import SprintCreator from 'views/SprintCreator';
-// import Sprints from 'views/Sprints';
+import SprintCreator from 'views/SprintCreator';
+import Sprints from 'views/Sprints';
 import WaitingListSignup from 'views/WaitingListSignup';
 
 const Main = styled.main`
@@ -29,24 +30,22 @@ const Rudder: FunctionComponent = () => {
     <Wrapper>
       <Header />
       <Main>
-        <WaitingListSignup />
+        {settings.featureFlags.IS_BYPASSING_WAITING_LIST ? (
+          <Switch>
+            <Route path="/sprints/new">
+              <SprintCreator />
+            </Route>
+            <Route path="/sprints/:id">
+              <Goals />
+            </Route>
+            <Route path="/">
+              <Sprints />
+            </Route>
+          </Switch>
+        ) : (
+          <WaitingListSignup />
+        )}
       </Main>
-      {/*
-      <Header />
-      <Main>
-        <Switch>
-          <Route path="/sprints/new">
-            <SprintCreator />
-          </Route>
-          <Route path="/sprints/:id">
-            <Goals />
-          </Route>
-          <Route path="/">
-            <Sprints />
-          </Route>
-        </Switch>
-      </Main>
-      */}
     </Wrapper>
   );
 };

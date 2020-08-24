@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import noop from 'utils/noop';
 
-const Input: React.FunctionComponent<propTypes> = ({
+const Input: FunctionComponent<propTypes> = ({
   area = '',
   hasError = false,
+  isPlain = false,
   isStruck = false,
   label = '',
   onChange = noop,
@@ -14,10 +15,11 @@ const Input: React.FunctionComponent<propTypes> = ({
   type = 'text',
   value = '',
 }: propTypes) => (
-  <Wrapper $area={area} $hasError={hasError}>
+  <Wrapper $area={area} $hasError={hasError} $isPlain={isPlain}>
     <StyledInput
       $hasError={hasError}
       id={label}
+      $isPlain={isPlain}
       $isStruck={isStruck}
       onChange={(event) => onChange(event.target.value)}
       onKeyDown={(event) => onKeyDown(event.keyCode)}
@@ -36,6 +38,7 @@ const Input: React.FunctionComponent<propTypes> = ({
 type propTypes = {
   area?: string;
   hasError?: boolean;
+  isPlain?: boolean;
   isStruck?: boolean;
   label?: string;
   onChange?: { (value: string): void };
@@ -45,12 +48,18 @@ type propTypes = {
   value?: string;
 };
 
-const Wrapper = styled.div<{ $area: string; $hasError: boolean }>`
+const Wrapper = styled.div<{
+  $area: string;
+  $hasError: boolean;
+  $isPlain: boolean;
+}>`
   align-items: flex-end;
   display: flex;
   flex-direction: column;
   grid-area: ${({ $area }) => $area};
   margin-bottom: 32px;
+
+  ${({ $isPlain }) => $isPlain && 'margin-bottom: 0;'}
 
   &:focus-within > label {
     color: ${({ $hasError, theme }) =>
@@ -58,7 +67,11 @@ const Wrapper = styled.div<{ $area: string; $hasError: boolean }>`
   }
 `;
 
-const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
+const StyledInput = styled.input<{
+  $hasError: boolean;
+  $isPlain: boolean;
+  $isStruck: boolean;
+}>`
   background: none;
   border: none;
   border-bottom: solid
@@ -75,6 +88,8 @@ const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
   outline: none;
   padding: 8px;
   width: 100%;
+
+  ${({ $isPlain }) => $isPlain && 'border-bottom: none;'}
   ${({ $isStruck }) => $isStruck && 'text-decoration: line-through;'}
   ${({ theme }) => theme.font.medium};
 
@@ -89,6 +104,8 @@ const StyledInput = styled.input<{ $hasError: boolean; $isStruck: boolean }>`
       $hasError
         ? theme.colours.text.input.error
         : theme.colours.text.input.focus};
+
+    ${({ $isPlain }) => $isPlain && 'border-bottom: none;'}
   }
 
   &::placeholder {
