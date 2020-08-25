@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 const font = {
   small: css`
     font-family: 'Lora', serif;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-align: left;
   `,

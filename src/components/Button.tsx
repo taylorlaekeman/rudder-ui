@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import LoadingIndicator from 'components/LoadingIndicator';
 import noop from 'utils/noop';
@@ -7,18 +7,16 @@ import noop from 'utils/noop';
 const Button: FunctionComponent<propTypes> = ({
   area = '',
   children,
+  isDisabled = false,
   isLoading = false,
-  isStruck = false,
-  isText = false,
-  isUnderlined = false,
+  isPlain = false,
   onClick = noop,
   type = 'button',
 }: propTypes) => (
   <StyledButton
     $area={area}
-    $isText={isText}
-    $isStruck={isStruck}
-    $isUnderlined={isUnderlined}
+    disabled={isDisabled}
+    $isPlain={isPlain}
     onClick={onClick}
     type={type}
   >
@@ -29,19 +27,17 @@ const Button: FunctionComponent<propTypes> = ({
 type propTypes = {
   area?: string;
   children: React.ReactNode;
+  isDisabled?: boolean;
   isLoading?: boolean;
-  isStruck?: boolean;
-  isText?: boolean;
-  isUnderlined?: boolean;
+  isPlain?: boolean;
   onClick?: { (): void };
   type?: 'button' | 'submit';
 };
 
 const StyledButton = styled.button<{
   $area: string;
-  $isText: boolean;
-  $isStruck: boolean;
-  $isUnderlined: boolean;
+  disabled: boolean;
+  $isPlain: boolean;
 }>`
   align-items: center;
   appearance: none;
@@ -49,25 +45,33 @@ const StyledButton = styled.button<{
   border: none;
   border-radius: 4px;
   color: ${({ theme }) => theme.colours.text.button.normal};
-  cursor: ${({ $isText }) => ($isText ? 'text' : 'pointer')};
   display: flex;
   grid-area: ${({ $area }) => $area};
   padding: 8px 16px;
 
-  ${({ theme }) => theme.font.medium};
-  ${({ $isStruck, $isUnderlined }) => {
-    if ($isStruck && $isUnderlined)
-      return 'text-decoration: underline line-through;';
-    if ($isStruck) return 'text-decoration: line-through;';
-    if ($isUnderlined) return 'text-decoration: underline';
-    return '';
-  }}
+  ${({ theme }) => theme.font.medium}
+  ${({ disabled, theme }) =>
+    disabled &&
+    css`
+      color: ${theme.colours.text.button.disabled};
+    `}
+  ${({ $isPlain }) =>
+    $isPlain &&
+    css`
+      background: none;
+      padding: 0;
+    `}
 
   &:focus, &:hover {
-    background-color: ${({ theme }) => theme.colours.background.button.focus};
-    color: ${({ theme }) => theme.colours.text.button.focus};
     outline: none;
-    text-decoration: ${({ $isStruck }) => $isStruck && 'line-through'} underline;
+    text-decoration: underline;
+
+    ${({ $isPlain, theme }) =>
+      !$isPlain &&
+      css`
+        background-color: ${theme.colours.background.button.focus};
+        color: ${theme.colours.text.button.focus};
+      `}
 
     svg {
       fill: ${({ theme }) => theme.colours.icon.focus};

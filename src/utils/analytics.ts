@@ -13,6 +13,7 @@ function logWaitingListSignup(): void {
 }
 
 function logEvent(event: string): void {
+  if (!settings.featureFlags.IS_REPORTING_METRICS) return;
   amplitude.getInstance().logEvent(event);
 }
 

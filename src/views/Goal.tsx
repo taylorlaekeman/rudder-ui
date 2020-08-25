@@ -10,12 +10,6 @@ import Checkmark from 'components/icons/Checkmark';
 import { Goal as GoalType } from 'types';
 import { useDebounce } from 'hooks';
 
-type propTypes = {
-  goal: GoalType;
-  isAdding?: boolean;
-  sprint: string;
-};
-
 const Goal: FunctionComponent<propTypes> = ({
   goal,
   isAdding = false,
@@ -71,6 +65,7 @@ const Goal: FunctionComponent<propTypes> = ({
       />
       <Input
         area="text"
+        isPlain
         isStruck={goal.isAchieved}
         onChange={setText}
         onKeyDown={(key: number) => {
@@ -84,6 +79,12 @@ const Goal: FunctionComponent<propTypes> = ({
       {(isAddLoading || isUpdateLoading) && <LoadingIndicator />}
     </Wrapper>
   );
+};
+
+type propTypes = {
+  goal: GoalType;
+  isAdding?: boolean;
+  sprint: string;
 };
 
 const Wrapper = styled.div`
