@@ -45,6 +45,7 @@ const StyledButton = styled.button<{
   border: none;
   border-radius: 4px;
   color: ${({ theme }) => theme.colours.text.button.normal};
+  cursor: pointer;
   display: flex;
   grid-area: ${({ $area }) => $area};
   padding: 8px 16px;

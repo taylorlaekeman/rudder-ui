@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import settings from 'settings';
 import analytics from 'utils/analytics';
 import Goals from 'views/Goals';
 import Header from 'views/Header';
+import Login from 'views/Login';
 import SprintCreator from 'views/SprintCreator';
 import Sprints from 'views/Sprints';
 import WaitingListSignup from 'views/WaitingListSignup';
@@ -22,29 +24,46 @@ const Wrapper = styled.article`
 `;
 
 const Rudder: FunctionComponent = () => {
+  const { isAuthenticated } = useAuth0();
+
   useEffect(() => {
     analytics.logVisit();
   }, []);
+
+  if (!settings.featureFlags.IS_BYPASSING_WAITING_LIST)
+    return (
+      <Wrapper>
+        <Header />
+        <Main>
+          <WaitingListSignup />
+        </Main>
+      </Wrapper>
+    );
+
+  if (!isAuthenticated)
+    return (
+      <Wrapper>
+        <Main>
+          <Login />
+        </Main>
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
       <Header />
       <Main>
-        {settings.featureFlags.IS_BYPASSING_WAITING_LIST ? (
-          <Switch>
-            <Route path="/sprints/new">
-              <SprintCreator />
-            </Route>
-            <Route path="/sprints/:id">
-              <Goals />
-            </Route>
-            <Route path="/">
-              <Sprints />
-            </Route>
-          </Switch>
-        ) : (
-          <WaitingListSignup />
-        )}
+        <Switch>
+          <Route path="/sprints/new">
+            <SprintCreator />
+          </Route>
+          <Route path="/sprints/:id">
+            <Goals />
+          </Route>
+          <Route path="/">
+            <Sprints />
+          </Route>
+        </Switch>
       </Main>
     </Wrapper>
   );

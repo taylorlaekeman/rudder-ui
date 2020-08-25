@@ -1,11 +1,14 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { FunctionComponent } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from 'components/Button';
 import Link from 'components/Link';
+import settings from 'settings';
 
 const StyledHeader = styled.header`
-  align-items: center;
+  align-items: baseline;
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
@@ -25,9 +28,18 @@ const Heading = styled.h1`
 
 const Header: FunctionComponent = () => {
   const match = useRouteMatch('/');
+  const { isAuthenticated, logout } = useAuth0();
   return (
     <StyledHeader>
       <Heading>Rudder</Heading>
+      {isAuthenticated && (
+        <Button
+          isPlain
+          onClick={() => logout({ returnTo: settings.AUTH_REDIRECT })}
+        >
+          Logout
+        </Button>
+      )}
       {!match?.isExact && <Link to="/">Sprints &gt;</Link>}
     </StyledHeader>
   );
