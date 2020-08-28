@@ -1,16 +1,16 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import Button from 'components/Button';
+import { useAuth } from 'hooks';
 
 const Login: FunctionComponent = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { login } = useAuth();
 
   return (
     <>
       <Text>Welcome to Rudder</Text>
-      <Button onClick={loginWithRedirect}>Login or Signup</Button>
+      <Button onClick={login}>Login or Signup</Button>
     </>
   );
 };

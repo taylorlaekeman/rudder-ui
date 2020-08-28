@@ -1,8 +1,8 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { useAuth } from 'hooks';
 import settings from 'settings';
 import analytics from 'utils/analytics';
 import Goals from 'views/Goals';
@@ -24,7 +24,7 @@ const Wrapper = styled.article`
 `;
 
 const Rudder: FunctionComponent = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     analytics.logVisit();
