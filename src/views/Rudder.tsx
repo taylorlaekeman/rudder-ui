@@ -2,12 +2,10 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useAuth } from 'hooks';
 import settings from 'settings';
 import analytics from 'utils/analytics';
 import Goals from 'views/Goals';
 import Header from 'views/Header';
-import Login from 'views/Login';
 import SprintCreator from 'views/SprintCreator';
 import Sprints from 'views/Sprints';
 import WaitingListSignup from 'views/WaitingListSignup';
@@ -24,8 +22,6 @@ const Wrapper = styled.article`
 `;
 
 const Rudder: FunctionComponent = () => {
-  const { isAuthenticated } = useAuth();
-
   useEffect(() => {
     analytics.logVisit();
   }, []);
@@ -36,15 +32,6 @@ const Rudder: FunctionComponent = () => {
         <Header />
         <Main>
           <WaitingListSignup />
-        </Main>
-      </Wrapper>
-    );
-
-  if (!isAuthenticated)
-    return (
-      <Wrapper>
-        <Main>
-          <Login />
         </Main>
       </Wrapper>
     );
