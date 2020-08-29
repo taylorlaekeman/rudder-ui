@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Button from 'components/Button';
 import Link from 'components/Link';
-import { useAuth } from 'hooks';
+import useAuth from 'hooks/useAuth';
 
 const StyledHeader = styled.header`
   align-items: baseline;

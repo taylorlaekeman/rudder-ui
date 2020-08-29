@@ -11,7 +11,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
 import LoadingIndicator from 'components/LoadingIndicator';
-import { useAuth } from 'hooks';
+import useAuth from 'hooks/useAuth';
 import settings from 'settings';
 import GlobalStyles from 'styles/GlobalStyle';
 import theme from 'styles/theme';

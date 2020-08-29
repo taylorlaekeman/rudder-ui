@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import settings from 'settings';
 
-export const useAuth = (): {
+const useAuth = (): {
   isAuthenticated: boolean;
   login: { (): void };
   logout: { (): void };
@@ -25,7 +24,10 @@ export const useAuth = (): {
   };
 
   const saveToken = async (storeToken: { (token: string): void }) => {
+    //const token = await getAccessTokenSilently({ audience: 'https://api.rudder.to/api/v2' });
+    //const token = await getAccessTokenSilently({ audience: 'https://rudder.us.auth0.com/api/v2' });
     const token = await getAccessTokenSilently();
+    console.log(token);
     storeToken(token);
   };
 
@@ -37,26 +39,4 @@ export const useAuth = (): {
   };
 };
 
-export function useDebounce(
-  value: string | number,
-  delay: number
-): string | number {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [delay, value]);
-
-  return debouncedValue;
-}
-
-export default {
-  useAuth,
-  useDebounce,
-};
+export default useAuth;
