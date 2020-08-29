@@ -24,10 +24,7 @@ const useAuth = (): {
   };
 
   const saveToken = async (storeToken: { (token: string): void }) => {
-    //const token = await getAccessTokenSilently({ audience: 'https://api.rudder.to/api/v2' });
-    //const token = await getAccessTokenSilently({ audience: 'https://rudder.us.auth0.com/api/v2' });
     const token = await getAccessTokenSilently();
-    console.log(token);
     storeToken(token);
   };
 

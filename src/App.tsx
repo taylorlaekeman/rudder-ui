@@ -20,6 +20,7 @@ import Rudder from 'views/Rudder';
 
 const App: FunctionComponent = () => (
   <Auth0Provider
+    audience={settings.AUTH_AUDIENCE}
     clientId={settings.AUTH_CLIENT}
     domain={settings.AUTH_DOMAIN}
     redirectUri={settings.AUTH_REDIRECT}
