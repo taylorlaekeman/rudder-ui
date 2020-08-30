@@ -6,7 +6,7 @@ export default {
   AUTH_DOMAIN: 'rudder.us.auth0.com',
   AUTH_REDIRECT: 'https://rudder.to',
   featureFlags: {
-    IS_BYPASSING_WAITING_LIST: false,
+    IS_BYPASSING_WAITING_LIST: true,
     IS_REPORTING_METRICS: true,
   },
 };
