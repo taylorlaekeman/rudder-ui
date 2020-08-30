@@ -8,7 +8,7 @@ import Input, { BACKSPACE } from 'components/Form/Input';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Checkmark from 'components/icons/Checkmark';
 import { Goal as GoalType } from 'types';
-import { useDebounce } from 'hooks';
+import useDebounce from 'hooks/useDebounce';
 
 const Goal: FunctionComponent<propTypes> = ({
   goal,

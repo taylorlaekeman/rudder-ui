@@ -2,10 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from 'components/Button';
 import Link from 'components/Link';
+import useAuth from 'hooks/useAuth';
 
 const StyledHeader = styled.header`
-  align-items: center;
+  align-items: baseline;
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
@@ -25,9 +27,15 @@ const Heading = styled.h1`
 
 const Header: FunctionComponent = () => {
   const match = useRouteMatch('/');
+  const { isAuthenticated, logout } = useAuth();
   return (
     <StyledHeader>
       <Heading>Rudder</Heading>
+      {isAuthenticated && (
+        <Button isPlain onClick={logout}>
+          Logout
+        </Button>
+      )}
       {!match?.isExact && <Link to="/">Sprints &gt;</Link>}
     </StyledHeader>
   );

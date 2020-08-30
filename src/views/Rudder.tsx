@@ -26,25 +26,31 @@ const Rudder: FunctionComponent = () => {
     analytics.logVisit();
   }, []);
 
+  if (!settings.featureFlags.IS_BYPASSING_WAITING_LIST)
+    return (
+      <Wrapper>
+        <Header />
+        <Main>
+          <WaitingListSignup />
+        </Main>
+      </Wrapper>
+    );
+
   return (
     <Wrapper>
       <Header />
       <Main>
-        {settings.featureFlags.IS_BYPASSING_WAITING_LIST ? (
-          <Switch>
-            <Route path="/sprints/new">
-              <SprintCreator />
-            </Route>
-            <Route path="/sprints/:id">
-              <Goals />
-            </Route>
-            <Route path="/">
-              <Sprints />
-            </Route>
-          </Switch>
-        ) : (
-          <WaitingListSignup />
-        )}
+        <Switch>
+          <Route path="/sprints/new">
+            <SprintCreator />
+          </Route>
+          <Route path="/sprints/:id">
+            <Goals />
+          </Route>
+          <Route path="/">
+            <Sprints />
+          </Route>
+        </Switch>
       </Main>
     </Wrapper>
   );

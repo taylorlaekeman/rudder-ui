@@ -19,6 +19,12 @@ const font = {
     font-weight: 400;
     text-align: left;
   `,
+  extraLarge: css`
+    font-family: 'Lora', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    text-align: left;
+  `,
   subtitle: css`
     font-family: 'Raleway', sans-serif;
     font-size: 1.3rem;
