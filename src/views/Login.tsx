@@ -18,7 +18,7 @@ const Login: FunctionComponent = () => {
 const Text = styled.h2`
   margin-bottom: 128px;
   margin-top: 64px;
-  ${({ theme }) => theme.font.extraLarge}
+  ${({ theme }) => theme.fonts.title}
 `;
 
 export default Login;

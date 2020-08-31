@@ -52,7 +52,7 @@ const Wrapper = styled.div`
 const EndDate = styled.h3<{ $isActive: boolean }>`
   padding-bottom: 8px;
   text-decoration: ${({ $isActive }) => !$isActive && 'line-through'} underline;
-  ${({ theme }) => theme.font.large}
+  ${({ theme }) => theme.fonts.title}
 `;
 
 const Text = styled.p`

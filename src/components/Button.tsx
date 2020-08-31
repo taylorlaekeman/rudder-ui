@@ -50,7 +50,7 @@ const StyledButton = styled.button<{
   grid-area: ${({ $area }) => $area};
   padding: 8px 16px;
 
-  ${({ theme }) => theme.font.medium}
+  ${({ theme }) => theme.fonts.button}
   ${({ disabled, theme }) =>
     disabled &&
     css`

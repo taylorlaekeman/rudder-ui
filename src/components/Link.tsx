@@ -7,7 +7,7 @@ const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
   font-size: 1.2rem;
   text-decoration: ${({ $isStruck }) =>
     $isStruck ? 'line-through 2px' : 'none'};
-  ${({ theme }) => theme.font.medium}
+  ${({ theme }) => theme.fonts.link}
 `;
 
 type propTypes = {

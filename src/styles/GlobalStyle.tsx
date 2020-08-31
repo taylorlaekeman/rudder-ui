@@ -7,15 +7,19 @@ export default createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.font.medium};
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.default};
   } 
 
+  h1 {
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.title};
+  }
+
   h2 {
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.font.large};
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.title};
   }
 
   p {
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.font.small};
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.body};
   }
 
   a, h1, h2, p {

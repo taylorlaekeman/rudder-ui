@@ -21,6 +21,12 @@ const Sprints: FunctionComponent = () => {
 
   if (isLoading) return <LoadingIndicator />;
 
+  if (sprints.length === 0) return (
+    <>
+      <h2>Where to next?</h2>
+    </>
+  );
+
   return (
     <>
       <h2>Sprints</h2>

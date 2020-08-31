@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const font = {
+const palette = {
   small: css`
     font-family: 'Lora', serif;
     font-size: 0.85rem;
@@ -25,12 +25,18 @@ const font = {
     font-weight: 400;
     text-align: left;
   `,
-  subtitle: css`
-    font-family: 'Raleway', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-align: left;
-  `,
 };
 
-export default font;
+const fonts = {
+  body: palette.small,
+  button: palette.medium,
+  default: palette.medium,
+  input: palette.medium,
+  label: palette.small,
+  link: palette.medium,
+  logo: palette.large,
+  subtitle: palette.large,
+  title: palette.extraLarge,
+};
+
+export default fonts;
