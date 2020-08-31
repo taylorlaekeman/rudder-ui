@@ -8,10 +8,6 @@ function logVisit(): void {
   logEvent('SITE_VISIT');
 }
 
-function logWaitingListSignup(): void {
-  logEvent('WAITING_LIST_SIGNUP');
-}
-
 function logEvent(event: string): void {
   if (!settings.featureFlags.IS_REPORTING_METRICS) return;
   amplitude.getInstance().logEvent(event);
@@ -19,5 +15,4 @@ function logEvent(event: string): void {
 
 export default {
   logVisit,
-  logWaitingListSignup,
 };
