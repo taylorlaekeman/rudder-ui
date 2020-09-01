@@ -15,6 +15,7 @@ export default createGlobalStyle`
   }
 
   h2 {
+    padding-bottom: 32px;
     ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.title};
   }
 

@@ -93,6 +93,7 @@ const Header = styled.header`
   grid-template-columns: 1fr 5fr 1fr;
   justify-items: center;
   padding: 4px 0;
+  padding-bottom: 16px;
 `;
 
 const Week = styled.div`
