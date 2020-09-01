@@ -5,25 +5,21 @@ const palette = {
     font-family: 'Lora', serif;
     font-size: 0.85rem;
     font-weight: 600;
-    text-align: left;
   `,
   medium: css`
     font-family: 'Lora', serif;
     font-size: 0.95rem;
-    font-weight: 600;
-    text-align: left;
+    font-weight: 500;
   `,
   large: css`
     font-family: 'Lora', serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    text-align: left;
+    font-size: 1.6rem;
+    font-weight: 700;
   `,
-  extraLarge: css`
+  huge: css`
     font-family: 'Lora', serif;
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     font-weight: 400;
-    text-align: left;
   `,
 };
 
@@ -36,7 +32,7 @@ const fonts = {
   link: palette.medium,
   logo: palette.large,
   subtitle: palette.large,
-  title: palette.extraLarge,
+  title: palette.huge,
 };
 
 export default fonts;

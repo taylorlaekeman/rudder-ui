@@ -11,7 +11,7 @@ export default createGlobalStyle`
   } 
 
   h1 {
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.title};
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.logo};
   }
 
   h2 {

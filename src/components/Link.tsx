@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Link as UnstyledLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledLink = styled(UnstyledLink)<{ $isStruck: boolean }>`
-  display: block;
-  font-size: 1.2rem;
-  text-decoration: ${({ $isStruck }) =>
-    $isStruck ? 'line-through 2px' : 'none'};
-  ${({ theme }) => theme.fonts.link}
-`;
+const Link: FunctionComponent<propTypes> = ({
+  children = '',
+  isButton = false,
+  isStruck = false,
+  to = '',
+}: propTypes) => (
+  <StyledLink $isButton={isButton} $isStruck={isStruck} to={to}>
+    {children}
+  </StyledLink>
+);
 
 type propTypes = {
   children?: React.ReactNode;
+  isButton?: boolean;
   isStruck?: boolean;
   to?: string;
 };
 
-const Link: React.FunctionComponent<propTypes> = ({
-  children = '',
-  isStruck = false,
-  to = '',
-}: propTypes) => (
-  <StyledLink $isStruck={isStruck} to={to}>
-    {children}
-  </StyledLink>
-);
+const StyledLink = styled(UnstyledLink)<{
+  $isButton: boolean;
+  $isStruck: boolean;
+}>`
+  ${({ $isButton, theme }) =>
+    $isButton
+      ? theme.components.clickable.button
+      : theme.components.clickable.link}
+`;
 
 export default Link;

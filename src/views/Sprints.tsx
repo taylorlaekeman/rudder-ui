@@ -21,11 +21,15 @@ const Sprints: FunctionComponent = () => {
 
   if (isLoading) return <LoadingIndicator />;
 
-  if (sprints.length === 0) return (
-    <>
-      <h2>Where to next?</h2>
-    </>
-  );
+  if (sprints.length === 0)
+    return (
+      <>
+        <Title>Where to next?</Title>
+        <Link isButton to="/sprints/new">
+          Start a sprint
+        </Link>
+      </>
+    );
 
   return (
     <>
@@ -49,6 +53,10 @@ const Sprints: FunctionComponent = () => {
     </>
   );
 };
+
+const Title = styled.h2`
+  margin-bottom: 32px;
+`;
 
 const Explanation = styled.p<{ $hasActiveSprint?: boolean }>`
   padding-top: 8px;

@@ -45,20 +45,20 @@ const AuthenticatedApp: FunctionComponent = () => {
 
   if (!isAuthenticated)
     return (
-      <Wrapper>
+      <article>
         <Main>
           <Login />
         </Main>
-      </Wrapper>
+      </article>
     );
 
   if (!token)
     return (
-      <Wrapper>
+      <article>
         <Main>
           <LoadingIndicator />
         </Main>
-      </Wrapper>
+      </article>
     );
 
   return (
@@ -88,13 +88,6 @@ const getAuthLink = (token: string) =>
 const httpLink = createHttpLink({
   uri: `${settings.API_URL}/graphql`,
 });
-
-const Wrapper = styled.article`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: 64px;
-`;
 
 const Main = styled.main`
   ${({ theme: appTheme }) => appTheme.pageSize}
