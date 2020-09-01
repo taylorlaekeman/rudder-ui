@@ -9,7 +9,10 @@ const Login: FunctionComponent = () => {
 
   return (
     <>
-      <Text>Welcome to Rudder</Text>
+      <Text>
+        <Small>Welcome to</Small>
+        Rudder
+      </Text>
       <Button onClick={login}>Login or Signup</Button>
     </>
   );
@@ -18,7 +21,14 @@ const Login: FunctionComponent = () => {
 const Text = styled.h2`
   margin-bottom: 128px;
   margin-top: 64px;
-  ${({ theme }) => theme.fonts.title}
+
+  ${({ theme }) => theme.fonts.splash.main}
+`;
+
+const Small = styled.span`
+  display: block;
+
+  ${({ theme }) => theme.fonts.splash.small}
 `;
 
 export default Login;

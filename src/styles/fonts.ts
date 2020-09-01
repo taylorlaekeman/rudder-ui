@@ -14,12 +14,17 @@ const palette = {
   large: css`
     font-family: 'Lora', serif;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 500;
   `,
   huge: css`
     font-family: 'Lora', serif;
     font-size: 2.2rem;
-    font-weight: 800;
+    font-weight: 700;
+  `,
+  enormous: css`
+    font-family: 'Lora', serif;
+    font-size: 5rem;
+    font-weight: 700;
   `,
 };
 
@@ -31,6 +36,10 @@ const fonts = {
   label: palette.small,
   link: palette.medium,
   logo: palette.large,
+  splash: {
+    main: palette.enormous,
+    small: palette.large,
+  },
   title: palette.huge,
 };
 
