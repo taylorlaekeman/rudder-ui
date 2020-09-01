@@ -1,46 +1,32 @@
 import { css } from 'styled-components';
 
-const palette = {
-  small: css`
-    font-family: 'Lora', serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-  `,
-  medium: css`
-    font-family: 'Lora', serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-  `,
-  large: css`
-    font-family: 'Lora', serif;
-    font-size: 1.6rem;
-    font-weight: 500;
-  `,
-  huge: css`
-    font-family: 'Lora', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-  `,
-  enormous: css`
-    font-family: 'Lora', serif;
-    font-size: 5rem;
-    font-weight: 700;
-  `,
+const buildFont = (size: string, weight: number) => css`
+  font-family: 'Lora', serif;
+  font-size: ${size};
+  font-weight: ${weight};
+`;
+
+const fontSizes = {
+  tiny: '0.85rem',
+  small: '0.95rem',
+  medium: '1.6rem',
+  large: '2.2rem',
+  huge: '5rem',
 };
 
 const fonts = {
-  body: palette.small,
-  button: palette.medium,
-  default: palette.medium,
-  input: palette.medium,
-  label: palette.small,
-  link: palette.medium,
-  logo: palette.large,
+  body: buildFont(fontSizes.tiny, 600),
+  button: buildFont(fontSizes.small, 500),
+  default: buildFont(fontSizes.small, 500),
+  input: buildFont(fontSizes.small, 500),
+  label: buildFont(fontSizes.tiny, 600),
+  link: buildFont(fontSizes.small, 500),
+  logo: buildFont(fontSizes.medium, 500),
   splash: {
-    main: palette.enormous,
-    small: palette.large,
+    main: buildFont(fontSizes.huge, 700),
+    small: buildFont(fontSizes.medium, 500),
   },
-  title: palette.huge,
+  title: buildFont(fontSizes.large, 700),
 };
 
 export default fonts;
