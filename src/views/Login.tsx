@@ -9,7 +9,10 @@ const Login: FunctionComponent = () => {
 
   return (
     <>
-      <Text><Small>Welcome to</Small>Rudder</Text>
+      <Text>
+        <Small>Welcome to</Small>
+        Rudder
+      </Text>
       <Button onClick={login}>Login or Signup</Button>
     </>
   );
