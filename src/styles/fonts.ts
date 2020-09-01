@@ -19,7 +19,7 @@ const palette = {
   huge: css`
     font-family: 'Lora', serif;
     font-size: 2.2rem;
-    font-weight: 400;
+    font-weight: 800;
   `,
 };
 
@@ -31,7 +31,6 @@ const fonts = {
   label: palette.small,
   link: palette.medium,
   logo: palette.large,
-  subtitle: palette.large,
   title: palette.huge,
 };
 
