@@ -91,7 +91,7 @@ const StyledInput = styled.input<{
 
   ${({ $isPlain }) => $isPlain && 'border-bottom: none;'}
   ${({ $isStruck }) => $isStruck && 'text-decoration: line-through;'}
-  ${({ theme }) => theme.font.medium};
+  ${({ theme }) => theme.fonts.input};
 
   &:focus {
     border-bottom: solid
@@ -129,7 +129,7 @@ const Label = styled.label<{ $hasError: boolean }>`
   padding: 0 8px;
   width: max-content;
 
-  ${({ theme }) => theme.font.small}
+  ${({ theme }) => theme.fonts.label}
 
   &:focus {
     color: ${({ $hasError, theme }) =>

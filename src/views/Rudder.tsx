@@ -8,17 +8,6 @@ import Header from 'views/Header';
 import SprintCreator from 'views/SprintCreator';
 import Sprints from 'views/Sprints';
 
-const Main = styled.main`
-  ${({ theme }) => theme.pageSize}
-`;
-
-const Wrapper = styled.article`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: 64px;
-`;
-
 const Rudder: FunctionComponent = () => {
   useEffect(() => {
     analytics.logVisit();
@@ -43,5 +32,15 @@ const Rudder: FunctionComponent = () => {
     </Wrapper>
   );
 };
+
+const Wrapper = styled.article`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Main = styled.main`
+  ${({ theme }) => theme.pageSize}
+`;
 
 export default Rudder;

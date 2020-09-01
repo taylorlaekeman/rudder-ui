@@ -10,7 +10,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import type { Sprint } from 'types';
 
 const Title = styled.h2`
-  ${({ theme }) => theme.font.subtitle}
+  ${({ theme }) => theme.fonts.subtitle}
 `;
 
 const SprintCreator: FunctionComponent = () => {
