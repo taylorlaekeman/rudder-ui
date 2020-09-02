@@ -27,12 +27,13 @@ const buttons = {
     }
   `,
   link: css`
-    align-items: center;
+    align-items: flex-start;
     appearance: none;
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     text-decoration: none;
 
     ${({ theme }) => theme.fonts.link}

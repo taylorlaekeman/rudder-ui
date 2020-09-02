@@ -8,25 +8,29 @@ import useAuth from 'hooks/useAuth';
 const Header: FunctionComponent = () => {
   const { isAuthenticated, logout } = useAuth();
   return (
-    <StyledHeader>
+    <Wrapper>
       <Link to="/">
-        <h1>Rudder</h1>
+        <Title>Rudder</Title>
       </Link>
       {isAuthenticated && (
         <Button isPlain onClick={logout}>
           Logout
         </Button>
       )}
-    </StyledHeader>
+    </Wrapper>
   );
 };
 
-const StyledHeader = styled.header`
+const Wrapper = styled.header`
   align-items: baseline;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 64px;
+
   ${({ theme }) => theme.pageSize}
+`;
+
+const Title = styled.h1`
+  ${({ theme }) => theme.fonts.logo}
 `;
 
 export default Header;

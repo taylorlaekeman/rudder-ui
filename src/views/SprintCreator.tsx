@@ -34,7 +34,7 @@ const SprintCreator: FunctionComponent = () => {
 };
 
 const Subhead = styled.p`
-  padding-bottom: 64px;
+  padding-bottom: 32px;
 `;
 
 export default SprintCreator;

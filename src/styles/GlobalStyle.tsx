@@ -7,16 +7,12 @@ export default createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.default};
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.body};
   } 
 
-  h1 {
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.logo};
-  }
-
   h2 {
-    padding-bottom: 32px;
-    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.title};
+    padding-bottom: 4px;
+    ${({ theme }: { theme: typeof themeDefinition }) => theme.fonts.pageTitle};
   }
 
   p {

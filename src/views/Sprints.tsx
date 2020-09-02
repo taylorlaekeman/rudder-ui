@@ -21,30 +21,22 @@ const Sprints: FunctionComponent = () => {
 
   if (isLoading) return <LoadingIndicator />;
 
-  if (sprints.length === 0)
-    return (
-      <>
-        <h2>Where to next?</h2>
-        <Link isButton to="/sprints/new">
-          Start a sprint
-        </Link>
-      </>
-    );
-
   return (
     <>
-      <h2>Sprints</h2>
-      <Explanation $hasActiveSprint={hasActiveSprint}>
-        A sprint is a list of goals with a deadline. Pick a date in the near
-        future and decide what you want to have finished by that day.
-      </Explanation>
-
-      {!hasActiveSprint && (
+      {hasActiveSprint ? (
         <>
-          <NoSprints>No active sprints</NoSprints>
-          <Link to="/sprints/new">+ Start a sprint</Link>
+          <Title $hasActiveSprint>Sprints</Title>
+          <Explanation>A list of goals with a deadline</Explanation>
+        </>
+      ) : (
+        <>
+          <Title>Where to next?</Title>
+          <Link isButton to="/sprints/new">
+            Start a sprint
+          </Link>
         </>
       )}
+
       <List>
         {sprints?.map((sprint: SprintType) => (
           <Sprint key={sprint.id} sprint={sprint} />
@@ -54,18 +46,17 @@ const Sprints: FunctionComponent = () => {
   );
 };
 
-const Explanation = styled.p<{ $hasActiveSprint?: boolean }>`
-  padding-top: 8px;
-  padding-bottom: ${({ $hasActiveSprint }) =>
-    $hasActiveSprint ? '0' : '32px'};
+const Title = styled.h2<{ $hasActiveSprint?: boolean }>`
+  ${({ $hasActiveSprint }) => !$hasActiveSprint && 'padding-bottom: 32px;'}
 `;
 
-const NoSprints = styled.p`
-  padding: 32px 0;
+const Explanation = styled.p<{ $hasActiveSprint?: boolean }>`
+  padding-top: 4px;
+  padding-bottom: 16px;
 `;
 
 const List = styled.ul`
-  padding-top: 32px;
+  padding-top: 64px;
 `;
 
 export default Sprints;
