@@ -2,19 +2,18 @@ import { css } from 'styled-components';
 
 const palette = {
   brand: {
-    100: 'hsl(214, 90%, 97%)',
-    300: 'hsl(214, 40%, 80%)',
-    500: 'hsl(214, 70%, 35%)',
-    700: 'hsl(214, 30%, 40%)',
-    900: 'hsl(214, 30%, 20%)',
+    100: 'hsl(214, 90%, 98%)',
+    200: 'hsl(214, 79%, 93%)',
+    300: 'hsl(214, 70%, 77%)',
+    400: 'hsl(214, 90%, 68%)',
+    500: 'hsl(214, 85%, 55%)',
+    600: 'hsl(214, 65%, 44%)',
+    700: 'hsl(214, 65%, 35%)',
+    800: 'hsl(214, 75%, 23%)',
+    900: 'hsl(214, 80%, 15%)',
   },
-  error: {
-    900: 'red',
-  },
-  neutral: {
-    100: 'white',
-    700: 'hsl(214, 10%, 45%)',
-  },
+  error: 'red',
+  white: 'white',
 };
 
 export default {
@@ -26,7 +25,7 @@ export default {
   },
   border: {
     input: {
-      error: palette.error[900],
+      error: palette.error,
       focus: palette.brand[900],
       normal: palette.brand[700],
     },
@@ -43,13 +42,13 @@ export default {
       normal: palette.brand[900],
     },
     input: {
-      error: palette.error[900],
+      error: palette.error,
       focus: palette.brand[900],
       normal: palette.brand[700],
       placeholder: palette.brand[300],
     },
     label: {
-      error: palette.error[900],
+      error: palette.error,
       focus: palette.brand[900],
       normal: palette.brand[700],
     },
