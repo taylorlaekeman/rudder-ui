@@ -1,7 +1,8 @@
 import { css } from 'styled-components';
 
 const responsiveSizing = css`
-  padding: 32px;
+  padding: 0 32px;
+  padding-top: 32px;
   width: 100%;
 
   @media (min-width: 528px) {

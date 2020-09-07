@@ -22,13 +22,13 @@ const Text = styled.h2`
   margin-bottom: 128px;
   margin-top: 64px;
 
-  ${({ theme }) => theme.fonts.splash.main}
+  ${({ theme }) => theme.fonts.splash}
 `;
 
 const Small = styled.span`
   display: block;
 
-  ${({ theme }) => theme.fonts.splash.small}
+  ${({ theme }) => theme.fonts.subsplash}
 `;
 
 export default Login;

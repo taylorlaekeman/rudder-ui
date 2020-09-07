@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 const palette = {
   brand: {
     100: 'hsl(214, 90%, 97%)',
@@ -30,6 +32,7 @@ export default {
     },
   },
   icon: {
+    disabled: palette.brand[300],
     focus: palette.brand[100],
     normal: palette.brand[900],
   },
@@ -49,6 +52,15 @@ export default {
       error: palette.error[900],
       focus: palette.brand[900],
       normal: palette.brand[700],
+    },
+    listSprint: {
+      disabled: css`
+        color: ${palette.brand[300]};
+      `,
+      focus: palette.brand[900],
+      normal: css`
+        color: ${palette.brand[900]};
+      `,
     },
     normal: palette.brand[900],
     placeholder: palette.brand[700],
