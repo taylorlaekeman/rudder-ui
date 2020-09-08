@@ -9,25 +9,25 @@ const buildFont = (size: string, weight: number) => css`
 const fontSizes = {
   tiny: '0.85rem',
   small: '0.95rem',
-  medium: '1.2rem',
+  medium: '1.8rem',
   large: '2.2rem',
-  huge: '5rem',
+  huge: '6rem',
 };
 
 const fonts = {
   body: buildFont(fontSizes.tiny, 600),
-  button: buildFont(fontSizes.small, 500),
+  button: buildFont(fontSizes.small, 700),
   input: buildFont(fontSizes.small, 500),
   label: buildFont(fontSizes.tiny, 600),
   link: buildFont(fontSizes.small, 500),
   logo: buildFont(fontSizes.medium, 700),
-  splash: buildFont(fontSizes.huge, 700),
   listSprint: {
     days: buildFont(fontSizes.tiny, 600),
     goals: buildFont(fontSizes.tiny, 400),
     title: buildFont(fontSizes.medium, 500),
   },
-  subsplash: buildFont(fontSizes.medium, 500),
+  splash: buildFont(fontSizes.huge, 400),
+  subsplash: buildFont(fontSizes.medium, 400),
   pageTitle: buildFont(fontSizes.large, 700),
 };
 

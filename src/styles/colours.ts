@@ -39,7 +39,7 @@ export default {
     button: {
       disabled: palette.brand[300],
       focus: palette.brand[100],
-      normal: palette.brand[900],
+      normal: palette.brand[800],
     },
     input: {
       error: palette.error,
@@ -61,7 +61,7 @@ export default {
         color: ${palette.brand[900]};
       `,
     },
-    normal: palette.brand[900],
+    normal: palette.brand[800],
     placeholder: palette.brand[700],
   },
 };
