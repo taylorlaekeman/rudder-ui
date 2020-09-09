@@ -63,7 +63,6 @@ type propTypes = {
 
 const Wrapper = styled.article`
   align-items: center;
-  background-color: green;
   display: flex;
   flex-direction: column;
   justify-content: center;
