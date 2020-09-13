@@ -63,5 +63,6 @@ export default {
     },
     normal: palette.brand[800],
     placeholder: palette.brand[700],
+    weak: palette.brand[700],
   },
 };

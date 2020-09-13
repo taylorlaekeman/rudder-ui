@@ -7,6 +7,7 @@ import analytics from 'utils/analytics';
 import Goals from 'views/Goals';
 import Header from 'views/Header';
 import Login from 'views/Login';
+import Sprint from 'views/OtherSprint';
 import SprintCreator from 'views/SprintCreator';
 import Sprints from 'views/Sprints';
 
@@ -48,7 +49,7 @@ const Rudder: FunctionComponent<propTypes> = ({
             <Goals />
           </Route>
           <Route path="/">
-            <Sprints />
+            <Sprint />
           </Route>
         </Switch>
       </Main>

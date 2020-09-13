@@ -10,6 +10,13 @@ export function countDaysLeftInSprint(sprint: Sprint): number {
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
 
+export function getNextSaturday(): string {
+  const nextSaturday = new Date(TODAY);
+  const daysUntilSaturday = 6 - nextSaturday.getDay();
+  nextSaturday.setDate(nextSaturday.getDate() + daysUntilSaturday);
+  return stringifyDate(nextSaturday);
+}
+
 export function getReadableDate(date: string): string {
   const [year, month, day] = date.split('-');
   return `${MONTHS[parseInt(month, 10) - 1]} ${day}, ${year}`;
@@ -60,14 +67,17 @@ export function parseEndDate(sprint: Sprint): Date {
   return endDate;
 }
 
+export const stringifyDate = (date: Date): string => {
+  return `${date.getFullYear()}-${padWithZero(date.getMonth() + 1)}-${padWithZero(date.getDate())}`;
+}
+
 export const TODAY = new Date();
 
-export const TODAY_READABLE = `${TODAY.getFullYear()}-${padWithZero(
-  TODAY.getMonth() + 1
-)}-${padWithZero(TODAY.getDate())}`;
+export const TODAY_READABLE = stringifyDate(TODAY);
 
 export default {
   countDaysLeftInSprint,
+  getNextSaturday,
   getReadableDate,
   getWeekStructure,
   isSprintActive,
