@@ -1,103 +1,67 @@
+import { useMutation, useQuery } from '@apollo/client';
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
-import Boat from 'components/icons/Boat';
-import Trophy from 'components/icons/Trophy';
-import Link from 'components/Link';
-import type { Sprint as SprintType } from 'types';
+import { cacheUpdates, mutations, queries } from 'api';
+import LoadingIndicator from 'components/LoadingIndicator';
+import type { Goal as GoalType, Sprint as SprintType } from 'types';
 import {
   countDaysLeftInSprint,
+  getNextSaturday,
   getReadableDate,
   isSprintActive,
 } from 'utils/date';
+import Goal from 'views/Goal';
 
-const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
-  const achievedGoals = sprint.goals.filter((goal) => goal.isAchieved);
+const Sprint: FunctionComponent<propTypes> = ({}: propTypes) => {
+  const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
+  const [
+    createSprint,
+    { data: newSprint, loading: isCreatingSprint },
+  ] = useMutation<{ createSprint: SprintType }>(
+    mutations.createSprint,
+    cacheUpdates.saveNewSprint
+  );
+
+  if (isFetchingSprints) return <LoadingIndicator />;
+
+  const unsortedSprints = data?.sprints || [];
+  const sprints = [...unsortedSprints]?.sort((a: SprintType, b: SprintType) =>
+    new Date(a.endDate) < new Date(b.endDate) ? 1 : -1
+  );
+
+  const hasActiveSprint = sprints.some(isSprintActive);
+  if (!hasActiveSprint) {
+    const nextSaturday = getNextSaturday();
+    createSprint({ variables: { endDate: nextSaturday } });
+    return <LoadingIndicator />;
+  }
+
+  const sprint = sprints[0];
+
   const daysLeft = countDaysLeftInSprint(sprint);
-  const isActive = isSprintActive(sprint);
 
   return (
-    <Wrapper>
-      <Link to={`/sprints/${sprint.id}`}>
-        <Grid>
-          <EndDate $isActive={isActive}>
-            {getReadableDate(sprint.endDate)}
-          </EndDate>
-          {isActive ? (
-            <>
-              <DaysLeft>
-                {`${daysLeft} day${daysLeft === 1 ? '' : 's'} to go`}
-              </DaysLeft>
-              <Goals $isActive>
-                {sprint.goals.length === 0
-                  ? 'No goals yet!'
-                  : `${achievedGoals.length} goal${
-                      achievedGoals.length === 1 ? '' : 's'
-                    } achieved, ${
-                      sprint.goals.length - achievedGoals.length
-                    } still in-progress`}
-              </Goals>
-            </>
-          ) : (
-            <Goals $isActive={false}>
-              {`${achievedGoals.length} of ${sprint.goals.length} goals achieved`}
-            </Goals>
-          )}
-          {isActive ? <Boat area="icon" /> : <Trophy area="icon" isDisabled />}
-        </Grid>
-      </Link>
-    </Wrapper>
+    <>
+      <h2>This week</h2>
+      {sprints[0].goals.length > 0 ? <p>test</p> : <p>No goals yet!</p>}
+      <p>{daysLeft} days to go</p>
+      <form>
+        {sprint.goals.map((goal: GoalType) => (
+          <Goal goal={goal} key={goal.id} sprint={sprint.id} />
+        ))}
+        <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />
+      </form>
+    </>
   );
 };
 
-type propTypes = {
-  sprint: SprintType;
+type propTypes = {};
+
+const EMPTY_GOAL = {
+  id: 'empty',
+  isAchieved: false,
+  text: '',
 };
-
-const Wrapper = styled.div`
-  margin-bottom: 64px;
-  width: 100%;
-`;
-
-const Grid = styled.div`
-  align-items: center;
-  display: grid;
-  grid-gap: 0 8px;
-  grid-template-areas:
-    'title icon'
-    'days  icon'
-    'goals icon';
-  grid-template-columns: 1fr auto;
-  width: 100%;
-`;
-
-const EndDate = styled.h3<{ $isActive: boolean }>`
-  ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.colours.text.listSprint.normal
-      : theme.colours.text.listSprint.disabled}
-  grid-area: title;
-  padding-bottom: 16px;
-
-  ${({ theme }) => theme.fonts.listSprint.title}
-
-  &:hover {
-    color: red;
-  }
-`;
-
-const DaysLeft = styled.p`
-  padding-bottom: 4px;
-
-  ${({ theme }) => theme.fonts.listSprint.days}
-`;
-
-const Goals = styled.p<{ $isActive: boolean }>`
-  ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.colours.text.listSprint.normal
-      : theme.colours.text.listSprint.disabled}
-  ${({ theme }) => theme.fonts.listSprint.goals}
-`;
 
 export default Sprint;

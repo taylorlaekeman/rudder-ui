@@ -7,7 +7,7 @@ import Link from 'components/Link';
 import LoadingIndicator from 'components/LoadingIndicator';
 import type { Sprint as SprintType } from 'types';
 import { isSprintActive } from 'utils/date';
-import Sprint from 'views/Sprint';
+import Sprint from 'views/SprintListItem';
 
 const Sprints: FunctionComponent = () => {
   const { data, loading: isLoading } = useQuery(queries.getSprints);
