@@ -35,10 +35,17 @@ const Sprint: FunctionComponent = () => {
 
   const daysLeft = countDaysLeftInSprint(sprint);
 
+  const { goals } = sprint;
+  const achievedGoals = goals.filter((goal: GoalType) => goal.isAchieved);
+
   return (
     <>
       <h2>This week</h2>
-      {sprints[0].goals.length > 0 ? <p>test</p> : <p>No goals yet!</p>}
+      {sprints[0].goals.length > 0 ? (
+        <p>{`${achievedGoals.length} of ${goals.length} goals achieved`}</p>
+      ) : (
+        <p>No goals yet!</p>
+      )}
       <p>{`${daysLeft} days to go`}</p>
       <form>
         {sprint.goals.map((goal: GoalType) => (
