@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { FunctionComponent } from 'react';
-import { useParams } from 'react-router-dom';
 
 import { cacheUpdates, mutations, queries } from 'api';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -8,20 +7,15 @@ import type { Goal as GoalType, Sprint as SprintType } from 'types';
 import {
   countDaysLeftInSprint,
   getNextSaturday,
-  getReadableDate,
   isSprintActive,
 } from 'utils/date';
 import Goal from 'views/Goal';
 
-const Sprint: FunctionComponent<propTypes> = ({}: propTypes) => {
+const Sprint: FunctionComponent = () => {
   const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
-  const [
-    createSprint,
-    { data: newSprint, loading: isCreatingSprint },
-  ] = useMutation<{ createSprint: SprintType }>(
-    mutations.createSprint,
-    cacheUpdates.saveNewSprint
-  );
+  const [createSprint] = useMutation<{
+    createSprint: SprintType;
+  }>(mutations.createSprint, cacheUpdates.saveNewSprint);
 
   if (isFetchingSprints) return <LoadingIndicator />;
 
@@ -45,7 +39,7 @@ const Sprint: FunctionComponent<propTypes> = ({}: propTypes) => {
     <>
       <h2>This week</h2>
       {sprints[0].goals.length > 0 ? <p>test</p> : <p>No goals yet!</p>}
-      <p>{daysLeft} days to go</p>
+      <p>{`${daysLeft} days to go`}</p>
       <form>
         {sprint.goals.map((goal: GoalType) => (
           <Goal goal={goal} key={goal.id} sprint={sprint.id} />
@@ -55,8 +49,6 @@ const Sprint: FunctionComponent<propTypes> = ({}: propTypes) => {
     </>
   );
 };
-
-type propTypes = {};
 
 const EMPTY_GOAL = {
   id: 'empty',

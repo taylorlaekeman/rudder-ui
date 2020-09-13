@@ -68,8 +68,10 @@ export function parseEndDate(sprint: Sprint): Date {
 }
 
 export const stringifyDate = (date: Date): string => {
-  return `${date.getFullYear()}-${padWithZero(date.getMonth() + 1)}-${padWithZero(date.getDate())}`;
-}
+  return `${date.getFullYear()}-${padWithZero(
+    date.getMonth() + 1
+  )}-${padWithZero(date.getDate())}`;
+};
 
 export const TODAY = new Date();
 

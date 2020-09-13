@@ -9,7 +9,6 @@ import Header from 'views/Header';
 import Login from 'views/Login';
 import Sprint from 'views/Sprint';
 import SprintCreator from 'views/SprintCreator';
-import Sprints from 'views/Sprints';
 
 const Rudder: FunctionComponent<propTypes> = ({
   isAuthenticated = false,
