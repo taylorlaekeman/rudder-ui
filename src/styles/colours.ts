@@ -22,18 +22,29 @@ export default {
       focus: palette.brand[900],
       normal: palette.brand[100],
     },
+    checkbox: {
+      checked: palette.brand[200],
+      normal: palette.white,
+    },
   },
   border: {
+    checkbox: {
+      checked: palette.brand[200],
+      focus: palette.brand[900],
+      isAdding: palette.brand[200],
+      normal: palette.brand[700],
+    },
     input: {
       error: palette.error,
       focus: palette.brand[900],
+      isAdding: palette.brand[200],
       normal: palette.brand[700],
     },
   },
   icon: {
     disabled: palette.brand[300],
     focus: palette.brand[100],
-    normal: palette.brand[900],
+    normal: palette.brand[800],
   },
   text: {
     button: {
@@ -42,6 +53,7 @@ export default {
       normal: palette.brand[800],
     },
     input: {
+      checked: palette.brand[300],
       error: palette.error,
       focus: palette.brand[900],
       normal: palette.brand[700],
@@ -63,6 +75,9 @@ export default {
     },
     normal: palette.brand[800],
     placeholder: palette.brand[700],
+    sprint: {
+      summary: palette.brand[700],
+    },
     weak: palette.brand[700],
   },
 };

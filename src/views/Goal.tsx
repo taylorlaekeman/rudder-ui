@@ -1,10 +1,8 @@
 import { useMutation } from '@apollo/client';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { mutations } from 'api';
-import Checkbox from 'components/Form/Checkbox';
-import Input, { BACKSPACE } from 'components/Form/Input';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Checkmark from 'components/icons/Checkmark';
 import { Goal as GoalType } from 'types';
@@ -52,31 +50,36 @@ const Goal: FunctionComponent<propTypes> = ({
   }, [isAddCalled, isAddLoading, isUpdateCalled, isUpdateLoading]);
 
   return (
-    <Wrapper>
-      <Checkbox
-        area="checkbox"
+    <Wrapper $isChecked={goal.isAchieved}>
+      <HiddenInput
         id={goal.id}
-        onChange={(value) =>
+        checked={goal.isAchieved}
+        onChange={() =>
           updateGoal({
-            variables: { goal: goal.id, isAchieved: value, sprint },
+            variables: { goal: goal.id, isAchieved: !goal.isAchieved, sprint },
           })
         }
-        value={goal.isAchieved}
+        type="checkbox"
+      />
+      <Checkbox
+        $isAdding={isAdding}
+        $isChecked={goal.isAchieved}
+        htmlFor={goal.id}
       />
       <Input
-        area="text"
-        isPlain
-        isStruck={goal.isAchieved}
-        onChange={setText}
-        onKeyDown={(key: number) => {
-          if (text === '' && key === BACKSPACE && !isAdding)
+        $isChecked={goal.isAchieved}
+        onChange={(event) => setText(event.target.value)}
+        onKeyDown={(event) => {
+          if (!text && event.keyCode === BACKSPACE)
             deleteGoal({ variables: { goal: goal.id, sprint } });
         }}
         placeholder="start typing to add a goal"
+        readOnly={goal.isAchieved}
+        type="text"
         value={text}
       />
-      {isConfirmVisible && <Checkmark />}
-      {(isAddLoading || isUpdateLoading) && <LoadingIndicator />}
+      {isConfirmVisible && <Checkmark area="icon" />}
+      {(isAddLoading || isUpdateLoading) && <LoadingIndicator area="icon" />}
     </Wrapper>
   );
 };
@@ -87,14 +90,86 @@ type propTypes = {
   sprint: string;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $isChecked: boolean }>`
   align-items: center;
   display: grid;
-  grid-gap: 16px;
-  grid-template-areas: 'checkbox text save cancel';
-  grid-template-columns: max-content 1fr max-content max-content;
+  grid-template-areas: 'checkbox text icon';
+  grid-template-columns: max-content 1fr max-content;
   justify-items: start;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
+
+  ${({ $isChecked }) =>
+    !$isChecked &&
+    css`
+      &:focus-within label {
+        border-color: ${({ theme }) => theme.colours.border.checkbox.focus};
+      }
+
+      &:focus-within input {
+        color: ${({ theme }) => theme.colours.text.input.focus};
+      }
+    `}
 `;
+
+const HiddenInput = styled.input`
+  appearance: none;
+`;
+
+const Checkbox = styled.label<{ $isAdding: boolean; $isChecked: boolean }>`
+  background-color: ${({ theme }) => theme.colours.background.checkbox.normal};
+  border: solid 2px;
+  border-color: ${({ theme }) => theme.colours.border.checkbox.normal};
+  border-radius: 100%;
+  grid-area: checkbox;
+  height: 14px;
+  width: 14px;
+
+  ${({ $isAdding }) =>
+    $isAdding &&
+    css`
+      border-color: ${({ theme }) => theme.colours.border.checkbox.isAdding};
+    `}
+
+  ${({ $isChecked }) =>
+    $isChecked &&
+    css`
+      background-color: ${({ theme }) =>
+        theme.colours.background.checkbox.checked};
+      border-color: ${({ theme }) => theme.colours.border.checkbox.checked};
+    `}
+`;
+
+const Input = styled.input<{ $isChecked: boolean }>`
+  border: none;
+  color: ${({ theme }) => theme.colours.text.input.normal};
+  font-size: 1.2rem;
+  font-weight: 400;
+  grid-area: text;
+  margin-left: 10px;
+  outline: none;
+  width: 100%;
+
+  ${({ $isChecked }) =>
+    $isChecked &&
+    css`
+      color: ${({ theme }) => theme.colours.text.input.checked};
+      text-decoration: line-through;
+    `}
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colours.text.input.placeholder};
+    font-style: italic;
+    font-weight: 400;
+    opacity: 1;
+  }
+`;
+
+const BACKSPACE = 8;
+
+export const EMPTY_GOAL = {
+  id: 'empty',
+  isAchieved: false,
+  text: '',
+};
 
 export default Goal;

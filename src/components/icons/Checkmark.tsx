@@ -1,9 +1,10 @@
 import { ReactComponent as UnstyledCheckmark } from 'assets/icons/checkmark.svg';
 import styled from 'styled-components';
 
-const Checkmark = styled(UnstyledCheckmark)`
+const Checkmark = styled(UnstyledCheckmark)<{ area?: string }>`
   fill: ${({ theme }) => theme.colours.icon.normal};
-  width: 16px;
+  grid-area: ${({ area }) => area};
+  width: 14px;
   ${({ theme }) => theme.animations.fadein}
 `;
 

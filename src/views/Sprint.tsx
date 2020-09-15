@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 
 import { cacheUpdates, mutations, queries } from 'api';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -9,7 +10,7 @@ import {
   getNextSaturday,
   isSprintActive,
 } from 'utils/date';
-import Goal from 'views/Goal';
+import Goal, { EMPTY_GOAL } from 'views/Goal';
 
 const Sprint: FunctionComponent = () => {
   const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
@@ -40,27 +41,37 @@ const Sprint: FunctionComponent = () => {
 
   return (
     <>
-      <h2>This week</h2>
+      <Title>This week</Title>
       {sprints[0].goals.length > 0 ? (
-        <p>{`${achievedGoals.length} of ${goals.length} goals achieved`}</p>
+        <Summary>{`${achievedGoals.length} of ${goals.length} goals achieved`}</Summary>
       ) : (
-        <p>No goals yet!</p>
+        <Summary>No goals yet!</Summary>
       )}
-      <p>{`${daysLeft} days to go`}</p>
-      <form>
+      <Summary>{`${daysLeft} days to go`}</Summary>
+      <Form>
         {sprint.goals.map((goal: GoalType) => (
           <Goal goal={goal} key={goal.id} sprint={sprint.id} />
         ))}
         <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />
-      </form>
+      </Form>
     </>
   );
 };
 
-const EMPTY_GOAL = {
-  id: 'empty',
-  isAchieved: false,
-  text: '',
-};
+const Title = styled.h2`
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 15px;
+`;
+
+const Summary = styled.p`
+  color: ${({ theme }) => theme.colours.text.sprint.summary};
+  font-weight: 400;
+  margin-bottom: 15px;
+`;
+
+const Form = styled.form`
+  margin-top: 40px;
+`;
 
 export default Sprint;

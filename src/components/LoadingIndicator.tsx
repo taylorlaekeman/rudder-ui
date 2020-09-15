@@ -3,21 +3,24 @@ import styled from 'styled-components';
 
 import { ReactComponent as UnstyledCog } from 'assets/icons/cog.svg';
 
-type propTypes = {
-  isLarge?: boolean;
-};
-
 const LoadingIndicator: FunctionComponent<propTypes> = ({
+  area = '',
   isLarge = false,
 }: propTypes) => (
-  <Wrapper $isLarge={isLarge}>
+  <Wrapper $area={area} $isLarge={isLarge}>
     <Cog $isLarge={isLarge} />
   </Wrapper>
 );
 
-const Wrapper = styled.div<{ $isLarge: boolean }>`
+type propTypes = {
+  area?: string;
+  isLarge?: boolean;
+};
+
+const Wrapper = styled.div<{ $area: string; $isLarge: boolean }>`
   align-items: center;
   display: flex;
+  grid-area: ${({ $area }) => $area};
   justify-content: center;
   width: 100%;
   ${({ $isLarge }) => $isLarge && 'padding: 32px;'}
