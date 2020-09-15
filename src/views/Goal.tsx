@@ -70,7 +70,7 @@ const Goal: FunctionComponent<propTypes> = ({
         $isChecked={goal.isAchieved}
         onChange={(event) => setText(event.target.value)}
         onKeyDown={(event) => {
-          if (!text && event.keyCode === BACKSPACE)
+          if (!isAdding && !text && event.keyCode === BACKSPACE)
             deleteGoal({ variables: { goal: goal.id, sprint } });
         }}
         placeholder="start typing to add a goal"
