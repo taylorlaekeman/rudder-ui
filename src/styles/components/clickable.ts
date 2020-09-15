@@ -37,9 +37,15 @@ const buttons = {
     flex-direction: column;
     text-decoration: none;
 
-    ${({ theme }) => theme.fonts.link}
+    font-size: 1rem;
+    font-weight: 400;
 
-    &:focus, &:hover {
+    @media (min-width: 1080px) {
+      font-size: 1.6rem;
+    }
+
+    &:focus,
+    &:hover {
       text-decoration: underline;
     }
   `,

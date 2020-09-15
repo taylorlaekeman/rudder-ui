@@ -19,7 +19,6 @@ const fonts = {
   button: buildFont(fontSizes.small, 700),
   input: buildFont(fontSizes.small, 500),
   label: buildFont(fontSizes.tiny, 600),
-  link: buildFont(fontSizes.small, 400),
   logo: buildFont(fontSizes.medium, 700),
   listSprint: {
     days: buildFont(fontSizes.tiny, 600),

@@ -40,28 +40,55 @@ const Sprint: FunctionComponent = () => {
   const achievedGoals = goals.filter((goal: GoalType) => goal.isAchieved);
 
   return (
-    <>
-      <Title>This week</Title>
-      {sprints[0].goals.length > 0 ? (
-        <Summary>{`${achievedGoals.length} of ${goals.length} goals achieved`}</Summary>
-      ) : (
-        <Summary>No goals yet!</Summary>
-      )}
-      <Summary>{`${daysLeft} days to go`}</Summary>
+    <Wrapper>
+      <Details>
+        <Title>This week</Title>
+        {sprints[0].goals.length > 0 ? (
+          <Summary>{`${achievedGoals.length} of ${goals.length} goals achieved`}</Summary>
+        ) : (
+          <Summary>No goals yet!</Summary>
+        )}
+        <Summary>{`${daysLeft} days to go`}</Summary>
+      </Details>
       <Form>
         {sprint.goals.map((goal: GoalType) => (
           <Goal goal={goal} key={goal.id} sprint={sprint.id} />
         ))}
         <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />
       </Form>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: grid;
+  height: 100%;
+
+  grid-auto-rows: max-content;
+
+  @media (min-width: 1080px) {
+    grid-auto-rows: 1fr;
+    grid-template-areas: 'details form';
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const Details = styled.article`
+  @media (min-width: 1080px) {
+    padding-right: 80px;
+    padding-top: 40px;
+  }
+`;
 
 const Title = styled.h2`
   font-size: 3rem;
   font-weight: 400;
   margin-bottom: 15px;
+
+  @media (min-width: 1080px) {
+    font-size: 4.5rem;
+    margin-bottom: 50px;
+  }
 `;
 
 const Summary = styled.p`
@@ -72,6 +99,14 @@ const Summary = styled.p`
 
 const Form = styled.form`
   margin-top: 60px;
+
+  @media (min-width: 1080px) {
+    border-left: solid ${({ theme }) => theme.colours.border.divider} 1px;
+    height: 100%;
+    margin: 0;
+    padding-left: 80px;
+    padding-top: 40px;
+  }
 `;
 
 export default Sprint;

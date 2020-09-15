@@ -34,6 +34,7 @@ export default {
       isAdding: palette.brand[200],
       normal: palette.brand[700],
     },
+    divider: palette.brand[800],
     input: {
       error: palette.error,
       focus: palette.brand[900],

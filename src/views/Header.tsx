@@ -25,13 +25,26 @@ const Wrapper = styled.header`
   align-items: baseline;
   display: flex;
   justify-content: space-between;
+  padding: 40px;
+  width: 100%;
 
-  ${({ theme }) => theme.pageSize}
+  @media (min-width: 580px) {
+    width: 580px;
+  }
+
+  @media (min-width: 1080px) {
+    padding: 80px 40px;
+    width: 1080px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 1.2rem;
   font-weight: 500;
+
+  @media (min-width: 1080px) {
+    font-size: 2rem;
+  }
 `;
 
 export default Header;
