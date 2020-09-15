@@ -31,7 +31,7 @@ const buttons = {
     appearance: none;
     background: none;
     border: none;
-    color: ${({ theme }) => theme.colours.text.button.normal};
+    color: ${({ theme }) => theme.colours.text.link.normal};
     cursor: pointer;
     display: flex;
     flex-direction: column;

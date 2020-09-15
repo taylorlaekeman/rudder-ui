@@ -71,7 +71,7 @@ const Summary = styled.p`
 `;
 
 const Form = styled.form`
-  margin-top: 40px;
+  margin-top: 60px;
 `;
 
 export default Sprint;

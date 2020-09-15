@@ -8,7 +8,7 @@ const buildFont = (size: string, weight: number) => css`
 
 const fontSizes = {
   tiny: '0.85rem',
-  small: '0.95rem',
+  small: '1rem',
   medium: '1.8rem',
   large: '2.2rem',
   huge: '6rem',
@@ -19,7 +19,7 @@ const fonts = {
   button: buildFont(fontSizes.small, 700),
   input: buildFont(fontSizes.small, 500),
   label: buildFont(fontSizes.tiny, 600),
-  link: buildFont(fontSizes.small, 500),
+  link: buildFont(fontSizes.small, 400),
   logo: buildFont(fontSizes.medium, 700),
   listSprint: {
     days: buildFont(fontSizes.tiny, 600),

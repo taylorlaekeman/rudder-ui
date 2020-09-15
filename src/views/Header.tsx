@@ -30,7 +30,8 @@ const Wrapper = styled.header`
 `;
 
 const Title = styled.h1`
-  ${({ theme }) => theme.fonts.logo}
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
 
 export default Header;

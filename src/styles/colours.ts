@@ -64,6 +64,9 @@ export default {
       focus: palette.brand[900],
       normal: palette.brand[700],
     },
+    link: {
+      normal: palette.brand[700],
+    },
     listSprint: {
       disabled: css`
         color: ${palette.brand[300]};
