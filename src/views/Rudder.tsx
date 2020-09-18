@@ -6,6 +6,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import analytics from 'utils/analytics';
 import Goals from 'views/Goals';
 import Header from 'views/Header';
+import Journey from 'views/Journey';
 import Login from 'views/Login';
 import Sprint from 'views/Sprint';
 import SprintCreator from 'views/SprintCreator';
@@ -46,6 +47,9 @@ const Rudder: FunctionComponent<propTypes> = ({
           </Route>
           <Route path="/sprints/:id">
             <Goals />
+          </Route>
+          <Route path="/journey">
+            <Journey />
           </Route>
           <Route path="/">
             <Sprint />
