@@ -13,9 +13,14 @@ const Header: FunctionComponent = () => {
         <Title>Rudder</Title>
       </Link>
       {isAuthenticated && (
-        <Button isPlain onClick={logout}>
-          Logout
-        </Button>
+        <Nav>
+          <Link to="/journey">
+            Journey
+          </Link>
+          <Button isPlain onClick={logout}>
+            Logout
+          </Button>
+        </Nav>
       )}
     </Wrapper>
   );
@@ -45,6 +50,12 @@ const Title = styled.h1`
   @media (min-width: 1080px) {
     font-size: 2rem;
   }
+`;
+
+const Nav = styled.nav`
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20px;
 `;
 
 export default Header;
