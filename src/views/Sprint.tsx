@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { FunctionComponent, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { cacheUpdates, mutations, queries } from 'api';
@@ -14,10 +15,11 @@ import {
 import Goal, { EMPTY_GOAL } from 'views/Goal';
 
 const Sprint: FunctionComponent = () => {
-  const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
   const [createSprint] = useMutation<{
     createSprint: SprintType;
   }>(mutations.createSprint, cacheUpdates.saveNewSprint);
+  const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
+  const { id } = useParams();
 
   const hasFetched = useHasFinished(isFetchingSprints);
   const unsortedSprints = data?.sprints || [];
@@ -37,23 +39,18 @@ const Sprint: FunctionComponent = () => {
 
   if (!hasActiveSprint) return <LoadingIndicator />;
 
-  const sprint = sprints[0];
+  const sprint = id ? sprints.find((item) => item.id === id) : sprints[0];
 
   const daysLeft = countDaysLeftInSprint(sprint);
 
-  const { goals } = sprint;
-  const achievedGoals = goals.filter((goal: GoalType) => goal.isAchieved);
+  const isActive = daysLeft > 0;
 
   return (
     <Wrapper>
       <Details>
         <Title>This week</Title>
-        {sprints[0].goals.length > 0 ? (
-          <Summary>{`${achievedGoals.length} of ${goals.length} goals achieved`}</Summary>
-        ) : (
-          <Summary>No goals yet!</Summary>
-        )}
-        <Summary>{`${daysLeft} days to go`}</Summary>
+        <Summary>{getGoalsText(sprint.goals, isActive)}</Summary>
+        {isActive && <Summary>{`${daysLeft} days to go`}</Summary>}
       </Details>
       <Form>
         {sprint.goals.map((goal: GoalType) => (
@@ -113,5 +110,13 @@ const Form = styled.form`
     padding-top: 40px;
   }
 `;
+
+const getGoalsText = (goals: GoalType[], isActive: boolean) => {
+  if (goals.length === 0) return 'No goals yet!';
+  const achievedGoals = goals.filter((goal: GoalType) => goal.isAchieved);
+  if (isActive)
+    return `${achievedGoals.length} of ${goals.length} goals achieved`;
+  return `${achievedGoals.length} goals achieved!`;
+};
 
 export default Sprint;
