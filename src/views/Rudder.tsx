@@ -76,6 +76,7 @@ const Wrapper = styled.article`
 
 const Main = styled.main`
   height: 100%;
+  overflow-y: scroll;
   padding: 40px;
   padding-top: 0;
   width: 100%;

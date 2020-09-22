@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { cacheUpdates, mutations, queries } from 'api';
 import LoadingIndicator from 'components/LoadingIndicator';
+import useHasFinished from 'hooks/useHasFinished';
 import type { Goal as GoalType, Sprint as SprintType } from 'types';
 import {
   countDaysLeftInSprint,
@@ -18,19 +19,23 @@ const Sprint: FunctionComponent = () => {
     createSprint: SprintType;
   }>(mutations.createSprint, cacheUpdates.saveNewSprint);
 
-  if (isFetchingSprints) return <LoadingIndicator />;
-
+  const hasFetched = useHasFinished(isFetchingSprints);
   const unsortedSprints = data?.sprints || [];
+
   const sprints = [...unsortedSprints]?.sort((a: SprintType, b: SprintType) =>
     new Date(a.endDate) < new Date(b.endDate) ? 1 : -1
   );
 
   const hasActiveSprint = sprints.some(isSprintActive);
-  if (!hasActiveSprint) {
-    const nextSaturday = getNextSaturday();
-    createSprint({ variables: { endDate: nextSaturday } });
-    return <LoadingIndicator />;
-  }
+
+  useEffect(() => {
+    if (hasFetched && !hasActiveSprint) {
+      const nextSaturday = getNextSaturday();
+      createSprint({ variables: { endDate: nextSaturday } });
+    }
+  }, [createSprint, hasActiveSprint, hasFetched]);
+
+  if (!hasActiveSprint) return <LoadingIndicator />;
 
   const sprint = sprints[0];
 

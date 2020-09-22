@@ -70,6 +70,11 @@ export const mutations = {
       }
     }
   `,
+  deleteSprints: gql`
+    mutation DeleteSprints($sprints: [ID]) {
+      deleteSprints(input: { sprints: $sprints })
+    }
+  `,
   updateGoal: gql`
     mutation UpdateGoal(
       $sprint: ID!

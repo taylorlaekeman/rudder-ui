@@ -14,9 +14,7 @@ const Header: FunctionComponent = () => {
       </Link>
       {isAuthenticated && (
         <Nav>
-          <Link to="/journey">
-            Journey
-          </Link>
+          <Link to="/journey">Journey</Link>
           <Button isPlain onClick={logout}>
             Logout
           </Button>
