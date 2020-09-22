@@ -36,6 +36,7 @@ const buttons = {
     display: flex;
     flex-direction: column;
     text-decoration: none;
+    width: 100%;
 
     font-size: 1rem;
     font-weight: 400;

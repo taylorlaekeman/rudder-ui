@@ -3,6 +3,7 @@ import React, { FunctionComponent, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { mutations, queries } from 'api';
+import Link from 'components/Link';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useHasFinished from 'hooks/useHasFinished';
 import type { Goal as GoalType, Sprint as SprintType } from 'types';
@@ -49,22 +50,26 @@ const Journey: FunctionComponent = () => {
       <List>
         {sprints.map((sprint: SprintType) => (
           <Item key={sprint.id}>
-            <EndDate>{sprint.endDate}</EndDate>
-            {isSprintActive(sprint) ? (
-              <Goals>
-                {`${
-                  sprint.goals.filter((goal: GoalType) => goal.isAchieved)
-                    .length
-                } of ${sprint.goals.length} goals achieved`}
-              </Goals>
-            ) : (
-              <Goals>
-                {`${
-                  sprint.goals.filter((goal: GoalType) => goal.isAchieved)
-                    .length
-                } goals achieved`}
-              </Goals>
-            )}
+            <Link to={`/journey/${sprint.id}`}>
+              <SprintItem>
+                <EndDate>{sprint.endDate}</EndDate>
+                {isSprintActive(sprint) ? (
+                  <Goals>
+                    {`${
+                      sprint.goals.filter((goal: GoalType) => goal.isAchieved)
+                        .length
+                    } of ${sprint.goals.length} goals achieved`}
+                  </Goals>
+                ) : (
+                  <Goals>
+                    {`${
+                      sprint.goals.filter((goal: GoalType) => goal.isAchieved)
+                        .length
+                    } goals achieved`}
+                  </Goals>
+                )}
+              </SprintItem>
+            </Link>
           </Item>
         ))}
       </List>
@@ -83,12 +88,16 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  align-items: baseline;
   border-bottom: dotted ${({ theme }) => theme.colours.border.divider} 1px;
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 40px;
   padding: 10px 0;
+`;
+
+const SprintItem = styled.div`
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const EndDate = styled.h3`
