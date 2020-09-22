@@ -42,11 +42,8 @@ const Rudder: FunctionComponent<propTypes> = ({
       <Header />
       <Main>
         <Switch>
-          <Route path="/sprints/new">
-            <SprintCreator />
-          </Route>
-          <Route path="/sprints/:id">
-            <Goals />
+          <Route path="/journey/:id">
+            <Sprint />
           </Route>
           <Route path="/journey">
             <Journey />
