@@ -54,9 +54,14 @@ const Sprint: FunctionComponent = () => {
       </Details>
       <Form>
         {sprint.goals.map((goal: GoalType) => (
-          <Goal goal={goal} key={goal.id} sprint={sprint.id} />
+          <Goal
+            goal={goal}
+            isReadOnly={!isActive}
+            key={goal.id}
+            sprint={sprint.id}
+          />
         ))}
-        <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />
+        {isActive && <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />}
       </Form>
     </Wrapper>
   );

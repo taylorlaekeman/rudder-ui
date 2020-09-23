@@ -11,6 +11,7 @@ import useDebounce from 'hooks/useDebounce';
 const Goal: FunctionComponent<propTypes> = ({
   goal,
   isAdding = false,
+  isReadOnly = false,
   sprint,
 }: propTypes) => {
   const [addGoal, { called: isAddCalled, loading: isAddLoading }] = useMutation(
@@ -54,11 +55,12 @@ const Goal: FunctionComponent<propTypes> = ({
       <HiddenInput
         id={goal.id}
         checked={goal.isAchieved}
-        onChange={() =>
+        onChange={() => {
+          if (isReadOnly) return;
           updateGoal({
             variables: { goal: goal.id, isAchieved: !goal.isAchieved, sprint },
-          })
-        }
+          });
+        }}
         type="checkbox"
       />
       <Checkbox
@@ -74,7 +76,7 @@ const Goal: FunctionComponent<propTypes> = ({
             deleteGoal({ variables: { goal: goal.id, sprint } });
         }}
         placeholder="start typing to add a goal"
-        readOnly={goal.isAchieved}
+        readOnly={isReadOnly || goal.isAchieved}
         type="text"
         value={text}
       />
@@ -87,6 +89,7 @@ const Goal: FunctionComponent<propTypes> = ({
 type propTypes = {
   goal: GoalType;
   isAdding?: boolean;
+  isReadOnly?: boolean;
   sprint: string;
 };
 
