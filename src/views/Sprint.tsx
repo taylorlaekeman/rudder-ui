@@ -10,6 +10,7 @@ import type { Goal as GoalType, Sprint as SprintType } from 'types';
 import {
   countDaysLeftInSprint,
   getNextSaturday,
+  getReadableDate,
   isSprintActive,
 } from 'utils/date';
 import Goal, { EMPTY_GOAL } from 'views/Goal';
@@ -48,7 +49,11 @@ const Sprint: FunctionComponent = () => {
   return (
     <Wrapper>
       <Details>
-        <Title>This week</Title>
+        {isActive ? (
+          <Title>This week</Title>
+        ) : (
+          <Title>{getReadableDate(sprint.endDate)}</Title>
+        )}
         <Summary>{getGoalsText(sprint.goals, isActive)}</Summary>
         {isActive && <Summary>{`${daysLeft} days to go`}</Summary>}
       </Details>
