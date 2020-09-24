@@ -64,27 +64,21 @@ const Wrapper = styled.article`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   justify-content: center;
+  overflow-y: scroll;
   width: 100%;
 `;
 
 const Main = styled.main`
-  height: 100%;
-  overflow-y: scroll;
   padding: 40px;
   padding-top: 0;
   width: 100%;
 
-  @media (min-width: 580px) {
-    width: 580px;
-  }
-
-  @media (min-width: 1080px) {
+  @media (min-width: 600px) {
     padding: 80px 40px;
     padding-bottom: 160px;
     padding-top: 0;
-    width: 1080px;
+    width: 600px;
   }
 `;
 
