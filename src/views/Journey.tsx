@@ -78,9 +78,10 @@ const Journey: FunctionComponent = () => {
 };
 
 const Title = styled.h2`
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 400;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
+  margin-top: 20px;
 `;
 
 const List = styled.ul`
