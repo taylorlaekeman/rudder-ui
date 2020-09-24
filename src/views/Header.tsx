@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { Link as UnstyledLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from 'components/Button';
-import Link from 'components/Link';
 import useAuth from 'hooks/useAuth';
 
 const Header: FunctionComponent = () => {
@@ -15,9 +14,7 @@ const Header: FunctionComponent = () => {
       {isAuthenticated && (
         <Nav>
           <Link to="/journey">Journey</Link>
-          <Button isPlain onClick={logout}>
-            Logout
-          </Button>
+          <Button onClick={logout}>Logout</Button>
         </Nav>
       )}
     </Wrapper>
@@ -31,29 +28,60 @@ const Wrapper = styled.header`
   padding: 40px;
   width: 100%;
 
-  @media (min-width: 580px) {
-    width: 580px;
-  }
-
-  @media (min-width: 1080px) {
-    padding: 80px 40px;
-    width: 1080px;
+  @media (min-width: 600px) {
+    width: 600px;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 1.2rem;
-  font-weight: 500;
+  color: ${({ theme }) => theme.colours.text.normal};
+  font-size: 1.1rem;
+  font-weight: 600;
 
-  @media (min-width: 1080px) {
-    font-size: 2rem;
+  @media (min-width: 600px) {
+    font-size: 1.5rem;
   }
 `;
 
 const Nav = styled.nav`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 20px;
+  grid-gap: 30px;
+`;
+
+const Link = styled(UnstyledLink)`
+  color: ${({ theme }) => theme.colours.text.normal};
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 600px) {
+    font-size: 1.5rem;
+  }
+`;
+
+const Button = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colours.text.normal};
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export default Header;
