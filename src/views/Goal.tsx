@@ -99,7 +99,11 @@ const Wrapper = styled.div<{ $isChecked: boolean }>`
   grid-template-areas: 'checkbox text icon';
   grid-template-columns: max-content 1fr max-content;
   justify-items: start;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   ${({ $isChecked }) =>
     !$isChecked &&
@@ -148,7 +152,7 @@ const Input = styled.input<{ $isChecked: boolean }>`
   font-size: 1.2rem;
   font-weight: 400;
   grid-area: text;
-  margin-left: 10px;
+  margin-left: 20px;
   outline: none;
   width: 100%;
 

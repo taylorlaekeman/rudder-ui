@@ -47,8 +47,8 @@ const Sprint: FunctionComponent = () => {
   const isActive = daysLeft > 0;
 
   return (
-    <Wrapper>
-      <Details>
+    <>
+      <article>
         {isActive ? (
           <Title>This week</Title>
         ) : (
@@ -56,7 +56,7 @@ const Sprint: FunctionComponent = () => {
         )}
         <Summary>{getGoalsText(sprint.goals, isActive)}</Summary>
         {isActive && <Summary>{`${daysLeft} days to go`}</Summary>}
-      </Details>
+      </article>
       <Form>
         {sprint.goals.map((goal: GoalType) => (
           <Goal
@@ -68,57 +68,26 @@ const Sprint: FunctionComponent = () => {
         ))}
         {isActive && <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />}
       </Form>
-    </Wrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
-  display: grid;
-  height: 100%;
-
-  grid-auto-rows: max-content;
-
-  @media (min-width: 1080px) {
-    grid-auto-rows: 1fr;
-    grid-template-areas: 'details form';
-    grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const Details = styled.article`
-  @media (min-width: 1080px) {
-    padding-right: 80px;
-    padding-top: 40px;
-  }
-`;
-
 const Title = styled.h2`
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 400;
-  margin-bottom: 15px;
-
-  @media (min-width: 1080px) {
-    font-size: 4.5rem;
-    margin-bottom: 50px;
-  }
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 const Summary = styled.p`
   color: ${({ theme }) => theme.colours.text.sprint.summary};
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 500;
   margin-bottom: 15px;
 `;
 
 const Form = styled.form`
   margin-top: 60px;
-
-  @media (min-width: 1080px) {
-    border-left: solid ${({ theme }) => theme.colours.border.divider} 1px;
-    height: 100%;
-    margin: 0;
-    padding-left: 80px;
-    padding-top: 40px;
-  }
 `;
 
 const getGoalsText = (goals: GoalType[], isActive: boolean) => {
