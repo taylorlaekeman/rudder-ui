@@ -15,7 +15,7 @@ const fontSizes = {
 };
 
 const fonts = {
-  body: buildFont(fontSizes.tiny, 600),
+  /*body: buildFont(fontSizes.tiny, 600),
   button: buildFont(fontSizes.small, 700),
   input: buildFont(fontSizes.small, 500),
   label: buildFont(fontSizes.tiny, 600),
@@ -27,7 +27,7 @@ const fonts = {
   },
   splash: buildFont(fontSizes.huge, 400),
   subsplash: buildFont(fontSizes.medium, 400),
-  pageTitle: buildFont(fontSizes.large, 700),
+  pageTitle: buildFont(fontSizes.large, 700),*/
 };
 
 export default fonts;

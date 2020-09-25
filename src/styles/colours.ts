@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 const palette = {
-  brand: {
+  primary: {
     100: 'hsl(214, 90%, 98%)',
     200: 'hsl(214, 79%, 93%)',
     300: 'hsl(214, 70%, 77%)',
@@ -17,7 +17,7 @@ const palette = {
 };
 
 export default {
-  background: {
+  /*background: {
     button: {
       focus: palette.brand[900],
       normal: palette.brand[100],
@@ -83,5 +83,7 @@ export default {
       summary: palette.brand[700],
     },
     weak: palette.brand[700],
-  },
+  },*/
+  ...palette,
+  text: palette.primary[800],
 };
