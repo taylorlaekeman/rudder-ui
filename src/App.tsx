@@ -8,14 +8,12 @@ import { setContext } from '@apollo/client/link/context';
 import { Auth0Provider } from '@auth0/auth0-react';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
-import LoadingIndicator from 'components/LoadingIndicator';
 import useAuth from 'hooks/useAuth';
 import settings from 'settings';
 import GlobalStyles from 'styles/GlobalStyle';
 import theme from 'styles/theme';
-import Login from 'views/Login';
 import Rudder from 'views/Rudder';
 
 const App: FunctionComponent = () => (
@@ -41,30 +39,19 @@ const AuthenticatedApp: FunctionComponent = () => {
     else setToken('');
   }, [isAuthenticated, saveToken, setToken]);
 
+  if (!isAuthenticated || !token)
+    return (
+      <Router>
+        <Rudder />
+      </Router>
+    );
+
   const client = getClient(token);
-
-  if (!isAuthenticated)
-    return (
-      <article>
-        <Main>
-          <Login />
-        </Main>
-      </article>
-    );
-
-  if (!token)
-    return (
-      <article>
-        <Main>
-          <LoadingIndicator />
-        </Main>
-      </article>
-    );
 
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Rudder />
+        <Rudder isAuthenticated token={token} />
       </Router>
     </ApolloProvider>
   );
@@ -88,9 +75,5 @@ const getAuthLink = (token: string) =>
 const httpLink = createHttpLink({
   uri: `${settings.API_URL}/graphql`,
 });
-
-const Main = styled.main`
-  ${({ theme: appTheme }) => appTheme.pageSize}
-`;
 
 export default App;

@@ -22,6 +22,10 @@ const Text = styled.h2`
   margin-bottom: 128px;
   margin-top: 64px;
 
+  @media (min-width: 828px) {
+    margin-top: 128px;
+  }
+
   ${({ theme }) => theme.fonts.splash}
 `;
 

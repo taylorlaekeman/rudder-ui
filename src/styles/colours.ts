@@ -2,19 +2,18 @@ import { css } from 'styled-components';
 
 const palette = {
   brand: {
-    100: 'hsl(214, 90%, 97%)',
-    300: 'hsl(214, 40%, 80%)',
-    500: 'hsl(214, 70%, 35%)',
-    700: 'hsl(214, 30%, 40%)',
-    900: 'hsl(214, 30%, 20%)',
+    100: 'hsl(214, 90%, 98%)',
+    200: 'hsl(214, 79%, 93%)',
+    300: 'hsl(214, 70%, 77%)',
+    400: 'hsl(214, 90%, 68%)',
+    500: 'hsl(214, 85%, 55%)',
+    600: 'hsl(214, 65%, 44%)',
+    700: 'hsl(214, 65%, 35%)',
+    800: 'hsl(214, 75%, 23%)',
+    900: 'hsl(214, 80%, 15%)',
   },
-  error: {
-    900: 'red',
-  },
-  neutral: {
-    100: 'white',
-    700: 'hsl(214, 10%, 45%)',
-  },
+  error: 'red',
+  white: 'white',
 };
 
 export default {
@@ -23,34 +22,50 @@ export default {
       focus: palette.brand[900],
       normal: palette.brand[100],
     },
+    checkbox: {
+      checked: palette.brand[200],
+      normal: palette.white,
+    },
   },
   border: {
-    input: {
-      error: palette.error[900],
+    checkbox: {
+      checked: palette.brand[200],
       focus: palette.brand[900],
+      isAdding: palette.brand[200],
+      normal: palette.brand[700],
+    },
+    divider: palette.brand[800],
+    input: {
+      error: palette.error,
+      focus: palette.brand[900],
+      isAdding: palette.brand[200],
       normal: palette.brand[700],
     },
   },
   icon: {
     disabled: palette.brand[300],
     focus: palette.brand[100],
-    normal: palette.brand[900],
+    normal: palette.brand[800],
   },
   text: {
     button: {
       disabled: palette.brand[300],
       focus: palette.brand[100],
-      normal: palette.brand[900],
+      normal: palette.brand[800],
     },
     input: {
-      error: palette.error[900],
+      checked: palette.brand[300],
+      error: palette.error,
       focus: palette.brand[900],
       normal: palette.brand[700],
       placeholder: palette.brand[300],
     },
     label: {
-      error: palette.error[900],
+      error: palette.error,
       focus: palette.brand[900],
+      normal: palette.brand[700],
+    },
+    link: {
       normal: palette.brand[700],
     },
     listSprint: {
@@ -62,7 +77,11 @@ export default {
         color: ${palette.brand[900]};
       `,
     },
-    normal: palette.brand[900],
+    normal: palette.brand[800],
     placeholder: palette.brand[700],
+    sprint: {
+      summary: palette.brand[700],
+    },
+    weak: palette.brand[700],
   },
 };

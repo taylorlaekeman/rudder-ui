@@ -1,103 +1,129 @@
-import React, { FunctionComponent } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import React, { FunctionComponent, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Boat from 'components/icons/Boat';
-import Trophy from 'components/icons/Trophy';
-import Link from 'components/Link';
-import type { Sprint as SprintType } from 'types';
+import { cacheUpdates, mutations, queries } from 'api';
+import LoadingIndicator from 'components/LoadingIndicator';
+import useHasFinished from 'hooks/useHasFinished';
+import type { Goal as GoalType, Sprint as SprintType } from 'types';
 import {
   countDaysLeftInSprint,
+  getNextSaturday,
   getReadableDate,
   isSprintActive,
 } from 'utils/date';
+import Goal, { EMPTY_GOAL } from 'views/Goal';
 
-const Sprint: FunctionComponent<propTypes> = ({ sprint }: propTypes) => {
-  const achievedGoals = sprint.goals.filter((goal) => goal.isAchieved);
+const Sprint: FunctionComponent = () => {
+  const [createSprint] = useMutation<{
+    createSprint: SprintType;
+  }>(mutations.createSprint, cacheUpdates.saveNewSprint);
+  const { data, loading: isFetchingSprints } = useQuery(queries.getSprints);
+  const { id } = useParams();
+
+  const hasFetched = useHasFinished(isFetchingSprints);
+  const unsortedSprints = data?.sprints || [];
+
+  const sprints = [...unsortedSprints]?.sort((a: SprintType, b: SprintType) =>
+    new Date(a.endDate) < new Date(b.endDate) ? 1 : -1
+  );
+
+  const hasActiveSprint = sprints.some(isSprintActive);
+
+  useEffect(() => {
+    if (hasFetched && !hasActiveSprint) {
+      const nextSaturday = getNextSaturday();
+      createSprint({ variables: { endDate: nextSaturday } });
+    }
+  }, [createSprint, hasActiveSprint, hasFetched]);
+
+  if (!hasActiveSprint) return <LoadingIndicator />;
+
+  const sprint = id ? sprints.find((item) => item.id === id) : sprints[0];
+
   const daysLeft = countDaysLeftInSprint(sprint);
-  const isActive = isSprintActive(sprint);
+
+  const isActive = daysLeft > 0;
 
   return (
-    <Wrapper>
-      <Link to={`/sprints/${sprint.id}`}>
-        <Grid>
-          <EndDate $isActive={isActive}>
-            {getReadableDate(sprint.endDate)}
-          </EndDate>
-          {isActive ? (
-            <>
-              <DaysLeft>
-                {`${daysLeft} day${daysLeft === 1 ? '' : 's'} to go`}
-              </DaysLeft>
-              <Goals $isActive>
-                {sprint.goals.length === 0
-                  ? 'No goals yet!'
-                  : `${achievedGoals.length} goal${
-                      achievedGoals.length === 1 ? '' : 's'
-                    } achieved, ${
-                      sprint.goals.length - achievedGoals.length
-                    } still in-progress`}
-              </Goals>
-            </>
-          ) : (
-            <Goals $isActive={false}>
-              {`${achievedGoals.length} of ${sprint.goals.length} goals achieved`}
-            </Goals>
-          )}
-          {isActive ? <Boat area="icon" /> : <Trophy area="icon" isDisabled />}
-        </Grid>
-      </Link>
-    </Wrapper>
+    <>
+      <Details>
+        {isActive ? (
+          <Title>This week</Title>
+        ) : (
+          <Title>{getReadableDate(sprint.endDate)}</Title>
+        )}
+        <Summary>{getGoalsText(sprint.goals, isActive)}</Summary>
+        {isActive && <Summary>{`${daysLeft} days to go`}</Summary>}
+      </Details>
+      <form>
+        {sprint.goals.map((goal: GoalType) => (
+          <Goal
+            goal={goal}
+            isReadOnly={!isActive}
+            key={goal.id}
+            sprint={sprint.id}
+          />
+        ))}
+        {isActive && <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />}
+      </form>
+    </>
   );
 };
 
-type propTypes = {
-  sprint: SprintType;
-};
+const Details = styled.article`
+  margin-bottom: 60px;
+  margin-top: 20px;
 
-const Wrapper = styled.div`
-  margin-bottom: 64px;
-  width: 100%;
-`;
+  @media (min-width: 500px) {
+    font-size: 2.6rem;
+    margin-bottom: 80px;
+    margin-top: 60px;
+  }
 
-const Grid = styled.div`
-  align-items: center;
-  display: grid;
-  grid-gap: 0 8px;
-  grid-template-areas:
-    'title icon'
-    'days  icon'
-    'goals icon';
-  grid-template-columns: 1fr auto;
-  width: 100%;
-`;
-
-const EndDate = styled.h3<{ $isActive: boolean }>`
-  ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.colours.text.listSprint.normal
-      : theme.colours.text.listSprint.disabled}
-  grid-area: title;
-  padding-bottom: 16px;
-
-  ${({ theme }) => theme.fonts.listSprint.title}
-
-  &:hover {
-    color: red;
+  @media (min-width: 1000px) {
+    font-size: 3rem;
+    margin-bottom: 100px;
+    margin-top: 80px;
   }
 `;
 
-const DaysLeft = styled.p`
-  padding-bottom: 4px;
+const Title = styled.h2`
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
 
-  ${({ theme }) => theme.fonts.listSprint.days}
+  @media (min-width: 500px) {
+    font-size: 2.6rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 3rem;
+  }
 `;
 
-const Goals = styled.p<{ $isActive: boolean }>`
-  ${({ $isActive, theme }) =>
-    $isActive
-      ? theme.colours.text.listSprint.normal
-      : theme.colours.text.listSprint.disabled}
-  ${({ theme }) => theme.fonts.listSprint.goals}
+const Summary = styled.p`
+  color: ${({ theme }) => theme.colours.text.sprint.summary};
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+
+  @media (min-width: 500px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1.2rem;
+  }
 `;
+
+const getGoalsText = (goals: GoalType[], isActive: boolean) => {
+  if (goals.length === 0) return 'No goals yet!';
+  const achievedGoals = goals.filter((goal: GoalType) => goal.isAchieved);
+  if (isActive)
+    return `${achievedGoals.length} of ${goals.length} goals achieved`;
+  return `${achievedGoals.length} goals achieved!`;
+};
 
 export default Sprint;

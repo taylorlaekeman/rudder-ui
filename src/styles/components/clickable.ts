@@ -31,14 +31,22 @@ const buttons = {
     appearance: none;
     background: none;
     border: none;
+    color: ${({ theme }) => theme.colours.text.link.normal};
     cursor: pointer;
     display: flex;
     flex-direction: column;
     text-decoration: none;
+    width: 100%;
 
-    ${({ theme }) => theme.fonts.link}
+    font-size: 1rem;
+    font-weight: 400;
 
-    &:focus, &:hover {
+    @media (min-width: 1080px) {
+      font-size: 1.6rem;
+    }
+
+    &:focus,
+    &:hover {
       text-decoration: underline;
     }
   `,
