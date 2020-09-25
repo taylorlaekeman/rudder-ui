@@ -180,8 +180,7 @@ const Input = styled.input<{ $isChecked: boolean }>`
   }
 
   @media (min-width: 1000px) {
-    font-size: 1.6rem;
-    margin-left: 30px;
+    font-size: 1.5rem;
   }
 `;
 

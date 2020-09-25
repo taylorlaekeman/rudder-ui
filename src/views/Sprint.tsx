@@ -48,7 +48,7 @@ const Sprint: FunctionComponent = () => {
 
   return (
     <>
-      <article>
+      <Details>
         {isActive ? (
           <Title>This week</Title>
         ) : (
@@ -56,8 +56,8 @@ const Sprint: FunctionComponent = () => {
         )}
         <Summary>{getGoalsText(sprint.goals, isActive)}</Summary>
         {isActive && <Summary>{`${daysLeft} days to go`}</Summary>}
-      </article>
-      <Form>
+      </Details>
+      <form>
         {sprint.goals.map((goal: GoalType) => (
           <Goal
             goal={goal}
@@ -67,10 +67,26 @@ const Sprint: FunctionComponent = () => {
           />
         ))}
         {isActive && <Goal goal={EMPTY_GOAL} isAdding sprint={sprint.id} />}
-      </Form>
+      </form>
     </>
   );
 };
+
+const Details = styled.article`
+  margin-bottom: 60px;
+
+  @media (min-width: 500px) {
+    font-size: 2.6rem;
+    margin-bottom: 80px;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 3rem;
+    margin-bottom: 100px;
+    margin-top: 60px;
+  }
+`;
 
 const Title = styled.h2`
   font-size: 2.2rem;
@@ -100,10 +116,6 @@ const Summary = styled.p`
   @media (min-width: 1000px) {
     font-size: 1.2rem;
   }
-`;
-
-const Form = styled.form`
-  margin-top: 60px;
 `;
 
 const getGoalsText = (goals: GoalType[], isActive: boolean) => {
