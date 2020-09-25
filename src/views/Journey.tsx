@@ -82,6 +82,18 @@ const Title = styled.h2`
   font-weight: 400;
   margin-bottom: 80px;
   margin-top: 20px;
+
+  @media (min-width: 500px) {
+    font-size: 2.6rem;
+    margin-bottom: 140px;
+    margin-top: 60px;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 3rem;
+    margin-bottom: 160px;
+    margin-top: 80px;
+  }
 `;
 
 const List = styled.ul`
@@ -92,6 +104,10 @@ const Item = styled.li`
   border-bottom: dotted ${({ theme }) => theme.colours.border.divider} 1px;
   margin-bottom: 40px;
   padding: 10px 0;
+
+  @media (min-width: 500px) {
+    margin-bottom: 60px;
+  }
 `;
 
 const SprintItem = styled.div`
@@ -104,11 +120,23 @@ const SprintItem = styled.div`
 const EndDate = styled.h3`
   color: ${({ theme }) => theme.colours.text.normal};
   font-size: 1.1rem;
+
+  @media (min-width: 500px) {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Goals = styled.p`
   color: ${({ theme }) => theme.colours.text.weak};
   font-weight: 400;
+
+  @media (min-width: 500px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export default Journey;

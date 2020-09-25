@@ -74,17 +74,18 @@ const Sprint: FunctionComponent = () => {
 
 const Details = styled.article`
   margin-bottom: 60px;
+  margin-top: 20px;
 
   @media (min-width: 500px) {
     font-size: 2.6rem;
     margin-bottom: 80px;
-    margin-top: 40px;
+    margin-top: 60px;
   }
 
   @media (min-width: 1000px) {
     font-size: 3rem;
     margin-bottom: 100px;
-    margin-top: 60px;
+    margin-top: 80px;
   }
 `;
 
@@ -92,7 +93,6 @@ const Title = styled.h2`
   font-size: 2.2rem;
   font-weight: 400;
   margin-bottom: 20px;
-  margin-top: 20px;
 
   @media (min-width: 500px) {
     font-size: 2.6rem;
