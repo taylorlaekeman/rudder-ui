@@ -38,7 +38,11 @@ const Title = styled.h1`
   font-size: 1.1rem;
   font-weight: 600;
 
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 1000px) {
     font-size: 1.5rem;
   }
 `;
@@ -60,7 +64,11 @@ const Link = styled(UnstyledLink)`
     text-decoration: underline;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 1000px) {
     font-size: 1.5rem;
   }
 `;
@@ -79,7 +87,11 @@ const Button = styled.button`
     text-decoration: underline;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 1000px) {
     font-size: 1.5rem;
   }
 `;

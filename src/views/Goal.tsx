@@ -116,10 +116,6 @@ const Wrapper = styled.div<{ $isChecked: boolean }>`
         color: ${({ theme }) => theme.colours.text.input.focus};
       }
     `}
-
-  @media (min-width: 600px) {
-    margin-bottom: 40px;
-  }
 `;
 
 const HiddenInput = styled.input`
@@ -149,7 +145,7 @@ const Checkbox = styled.label<{ $isAdding: boolean; $isChecked: boolean }>`
       border-color: ${({ theme }) => theme.colours.border.checkbox.checked};
     `}
 
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
     height: 20px;
     width: 20px;
   }
@@ -179,8 +175,12 @@ const Input = styled.input<{ $isChecked: boolean }>`
     opacity: 1;
   }
 
-  @media (min-width: 600px) {
-    font-size: 1.8rem;
+  @media (min-width: 500px) {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1.6rem;
     margin-left: 30px;
   }
 `;

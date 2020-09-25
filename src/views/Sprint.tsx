@@ -77,6 +77,14 @@ const Title = styled.h2`
   font-weight: 400;
   margin-bottom: 20px;
   margin-top: 20px;
+
+  @media (min-width: 500px) {
+    font-size: 2.6rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 3rem;
+  }
 `;
 
 const Summary = styled.p`
@@ -84,6 +92,14 @@ const Summary = styled.p`
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 15px;
+
+  @media (min-width: 500px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Form = styled.form`
